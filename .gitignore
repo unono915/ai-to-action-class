@@ -28,3 +28,7 @@ node_modules/.vite
 
 # TypeScript incremental build info
 *.tsbuildinfo
+
+# 대용량 원본 자료(교안 PDF 등)는 저장소에 커밋하지 않는다.
+# 필요한 화면은 public/assets/lesson/*.webp 로 추출해 사용한다.
+assets/*.pdf

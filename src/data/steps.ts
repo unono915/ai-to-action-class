@@ -28,9 +28,9 @@ export const steps: Step[] = [
     id: 2,
     title: '왜 이런 수업인가',
     shortTitle: '수업 철학',
-    summary: '판단을 행동으로 연결하는 수업의 의미를 살펴봅니다.',
+    summary: '실제 수업 사례로 ‘판단을 행동으로 잇는’ 철학을 나눕니다.',
     presentationHeadline: '판단을 행동으로 연결하면 수업이 달라집니다.',
-    durationMinutes: 8,
+    durationMinutes: 10,
   },
   {
     id: 3,

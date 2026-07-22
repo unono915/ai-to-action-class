@@ -1,5 +1,6 @@
 import { eventInfo } from './event'
-import { presentationScenes } from './presentationScenes'
+import { lessonNarrative } from './lessonNarrative'
+import type { LessonImageId } from './lessonImages'
 import type { StepId } from './steps'
 
 // 발표 모드 슬라이드 데이터.
@@ -16,13 +17,17 @@ export type Slide = {
   bullets?: string[]
   /** 하단 작은 보조 문구 */
   note?: string
+  /** 함께 띄울 수업 교안 이미지 */
+  image?: LessonImageId
 }
 
-// 2단계(왜 이런 수업인가)는 기존 9개 장면을 그대로 슬라이드로 사용한다.
-const philosophySlides: Slide[] = presentationScenes.map((scene) => ({
-  eyebrow: scene.label,
-  lines: scene.lines,
-  bullets: scene.bullets,
+// 2단계(왜 이런 수업인가)는 발표자의 실제 수업 사례로 철학을 풀어낸다.
+// lessonNarrative를 슬라이드로 매핑한다(이미지 포함).
+const philosophySlides: Slide[] = lessonNarrative.map((beat) => ({
+  eyebrow: beat.eyebrow,
+  lines: beat.heading,
+  note: beat.note,
+  image: beat.image,
 }))
 
 const slidesByStep: Record<StepId, Slide[]> = {
