@@ -2,7 +2,12 @@ import { CopyButton } from '../components/CopyButton'
 import { ScreenshotFigure } from '../components/ScreenshotFigure'
 import { groundedGemCaution, groundedGemInstructions } from '../data/prompts'
 
-const steps = ['Gem의 Knowledge 영역을 엽니다.', '파일 또는 Notebook을 추가합니다.', '자료 기반 응답 지침을 넣습니다.']
+const steps = [
+  '기본 도구에서 「가이드 학습」을 선택합니다.',
+  'Gem의 Knowledge 영역을 엽니다.',
+  '파일 또는 Notebook을 추가합니다.',
+  '자료 기반 응답 지침을 넣습니다.',
+]
 
 export function GroundedGemPage() {
   return (
@@ -30,10 +35,9 @@ export function GroundedGemPage() {
           ))}
         </ol>
 
-        <div className="xl:w-72 xl:shrink-0">
-          <div className="mb-3">
-            <ScreenshotFigure id="notebook-knowledge" />
-          </div>
+        <div className="space-y-3 xl:w-72 xl:shrink-0">
+          <ScreenshotFigure id="gem-builder-study" />
+          <ScreenshotFigure id="notebook-knowledge" />
         </div>
       </div>
 

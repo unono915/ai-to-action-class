@@ -12,6 +12,7 @@ export type ScreenshotId =
   | 'action-runner-actions'
   | 'action-runner-test'
   | 'gem-builder'
+  | 'gem-builder-study'
   | 'notebook-knowledge'
   | 'notebook-knowledge-added'
 
@@ -76,6 +77,12 @@ export const screenshots: Record<ScreenshotId, Screenshot> = {
     file: 'gem-builder.png',
     alt: 'Gemini Gem 만들기 화면에서 이름, 설명, 요청 사항, 지식 항목을 입력하고 오른쪽 미리보기에서 Gem을 확인하는 화면',
     caption: 'Gem 이름과 요청 사항(지침)을 입력하고 오른쪽 미리보기로 확인합니다.',
+  },
+  'gem-builder-study': {
+    id: 'gem-builder-study',
+    file: 'gem-builder-study.png',
+    alt: 'Gem 만들기 화면의 「기본 도구」 드롭다운에서 기본 도구 없음, 가이드 학습, 이미지 만들기, 음악 만들기, Canvas 중 「가이드 학습」을 선택하는 화면',
+    caption: '지식을 추가하기 전에 「기본 도구」에서 「가이드 학습」을 선택합니다.',
   },
   'notebook-knowledge': {
     id: 'notebook-knowledge',
