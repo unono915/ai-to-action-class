@@ -25,3 +25,6 @@ Thumbs.db
 
 # vite cache
 node_modules/.vite
+
+# TypeScript incremental build info
+*.tsbuildinfo
