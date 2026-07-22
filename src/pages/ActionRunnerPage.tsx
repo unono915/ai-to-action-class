@@ -31,7 +31,7 @@ export function ActionRunnerPage() {
   return (
     <section
       aria-label="판단을 행동으로"
-      className="grid grid-cols-1 gap-6 px-4 py-6 lg:grid-cols-[1fr_320px]"
+      className="grid grid-cols-1 gap-6 px-4 py-6 xl:grid-cols-[1fr_320px]"
     >
       <div>
         <div className="mb-4 flex flex-wrap items-baseline gap-x-3 gap-y-1">
