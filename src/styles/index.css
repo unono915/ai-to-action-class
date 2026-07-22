@@ -1,0 +1,31 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    color-scheme: light;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-neutral-50 text-neutral-900 antialiased;
+    margin: 0;
+    min-height: 100vh;
+  }
+
+  /* 키보드 focus를 항상 명확히 보여준다. */
+  :focus-visible {
+    @apply outline-none ring-2 ring-brand-500 ring-offset-2 ring-offset-white;
+  }
+}
+
+@layer components {
+  /* 스크린리더 전용 텍스트 (skip link 등). */
+  .sr-only-focusable:focus {
+    @apply not-sr-only fixed left-4 top-4 z-50 rounded-md bg-brand-600 px-4 py-2 text-white;
+  }
+}
