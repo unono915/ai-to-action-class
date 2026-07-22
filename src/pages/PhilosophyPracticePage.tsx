@@ -2,7 +2,7 @@ import { presentationScenes } from '../data/presentationScenes'
 
 /**
  * 실습 모드에서는 발표 장면을 순서대로 읽는 형태로 제공한다.
- * (발표 모드의 장면 이동/타이머는 PhilosophyPresentation이 담당)
+ * (발표 모드에서는 같은 내용을 슬라이드로 크게 보여준다 — PresentationDeck)
  */
 export function PhilosophyPracticePage() {
   return (
