@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from 'react'
-import { STORAGE_KEYS } from './appState'
+import { STORAGE_KEYS, type Mode } from './appState'
 import { useQueryState } from '../hooks/useQueryState'
 import { usePersistedState } from '../hooks/usePersistedState'
 import { useKeyboardNavigation } from '../hooks/useKeyboardNavigation'
@@ -14,8 +14,16 @@ import { AppHeader } from '../components/AppHeader'
 import { StepNavigation } from '../components/StepNavigation'
 import { BottomNavigation } from '../components/BottomNavigation'
 import { PresentationView } from '../components/PresentationView'
-import { PracticeView } from '../components/PracticeView'
 import { HelpPanel } from '../components/HelpPanel'
+import { StartPage } from '../pages/StartPage'
+import { PhilosophyPracticePage } from '../pages/PhilosophyPracticePage'
+import { PhilosophyPresentation } from '../pages/PhilosophyPresentation'
+import { TeachableMachinePage } from '../pages/TeachableMachinePage'
+import { ActionRunnerPage } from '../pages/ActionRunnerPage'
+import { SubjectIdeasPage } from '../pages/SubjectIdeasPage'
+import { GemBuilderPage } from '../pages/GemBuilderPage'
+import { GroundedGemPage } from '../pages/GroundedGemPage'
+import { SharePage } from '../pages/SharePage'
 
 export default function App() {
   const { state, setMode, setStep } = useQueryState()
@@ -62,15 +70,70 @@ export default function App() {
     )
   }, [step, setCompletedSteps])
 
-  // 발표 모드에서만 좌우 방향키 이동을 활성화한다.
+  const startMode = useCallback(
+    (nextMode: Mode) => {
+      setMode(nextMode)
+    },
+    [setMode],
+  )
+
+  const restart = useCallback(() => {
+    setMode('practice')
+    goToStep(1)
+  }, [setMode, goToStep])
+
+  // 발표 모드에서 좌우 방향키 이동을 활성화한다.
+  // 2단계는 자체 장면 이동(PhilosophyPresentation)이 키보드를 담당하므로 제외한다.
   useKeyboardNavigation({
     onPrev: goPrev,
     onNext: goNext,
-    enabled: mode === 'present',
+    enabled: mode === 'present' && step !== 2,
   })
 
   const currentStep = getStep(step)
   const isCompleted = completedSteps.includes(step)
+
+  const renderPracticeContent = () => {
+    switch (step) {
+      case 1:
+        return <StartPage onStartMode={startMode} />
+      case 2:
+        return <PhilosophyPracticePage />
+      case 3:
+        return <TeachableMachinePage />
+      case 4:
+        return <ActionRunnerPage />
+      case 5:
+        return <SubjectIdeasPage />
+      case 6:
+        return <GemBuilderPage />
+      case 7:
+        return <GroundedGemPage />
+      case 8:
+        return (
+          <SharePage
+            onJumpToStep={goToStep}
+            onOpenHelp={() => setHelpOpen(true)}
+            onRestart={restart}
+          />
+        )
+      default:
+        return null
+    }
+  }
+
+  const renderPresentationContent = () => {
+    if (step === 2) {
+      return (
+        <PhilosophyPresentation
+          durationMinutes={currentStep.durationMinutes}
+          onExitPrev={goPrev}
+          onExitNext={goNext}
+        />
+      )
+    }
+    return <PresentationView step={currentStep} />
+  }
 
   return (
     <div className="flex min-h-screen flex-col">
@@ -111,11 +174,7 @@ export default function App() {
 
         {/* 중앙 콘텐츠 */}
         <main id="main-content" className="min-w-0 flex-1">
-          {mode === 'present' ? (
-            <PresentationView step={currentStep} />
-          ) : (
-            <PracticeView step={currentStep} />
-          )}
+          {mode === 'present' ? renderPresentationContent() : renderPracticeContent()}
         </main>
       </div>
 
