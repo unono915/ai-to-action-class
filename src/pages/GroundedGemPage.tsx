@@ -1,4 +1,5 @@
 import { CopyButton } from '../components/CopyButton'
+import { ScreenshotFigure } from '../components/ScreenshotFigure'
 import { groundedGemCaution, groundedGemInstructions } from '../data/prompts'
 
 const steps = ['Gem의 Knowledge 영역을 엽니다.', '파일 또는 Notebook을 추가합니다.', '자료 기반 응답 지침을 넣습니다.']
@@ -22,11 +23,26 @@ export function GroundedGemPage() {
         계정과 관리자 설정에 따라 기능이 보이지 않을 수 있습니다.
       </p>
 
-      <ol className="mb-6 list-decimal space-y-2 pl-5 text-neutral-800">
-        {steps.map((step, index) => (
-          <li key={index}>{step}</li>
-        ))}
-      </ol>
+      <div className="mb-6 flex flex-col gap-6 xl:flex-row xl:items-start">
+        <ol className="list-decimal space-y-2 pl-5 text-neutral-800 xl:flex-1">
+          {steps.map((step, index) => (
+            <li key={index}>{step}</li>
+          ))}
+        </ol>
+
+        <div className="xl:w-72 xl:shrink-0">
+          <div className="mb-3">
+            <ScreenshotFigure id="notebook-knowledge" />
+          </div>
+        </div>
+      </div>
+
+      <div className="mb-6 max-w-xl">
+        <h3 className="mb-2 text-sm font-semibold uppercase tracking-wide text-neutral-500">
+          연결 완료 화면
+        </h3>
+        <ScreenshotFigure id="notebook-knowledge-added" highlight />
+      </div>
 
       <div className="mb-4 rounded-lg border border-neutral-200 bg-neutral-50 p-4">
         <pre className="whitespace-pre-wrap text-sm text-neutral-800">

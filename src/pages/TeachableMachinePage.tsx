@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { ResourceButton } from '../components/ResourceButton'
 import { CompletionPanel } from '../components/CompletionPanel'
 import { TroubleshootingPanel } from '../components/TroubleshootingPanel'
+import { ScreenshotFigure } from '../components/ScreenshotFigure'
 
 const steps = [
   'Teachable Machine에 접속합니다.',
@@ -54,14 +55,31 @@ export function TeachableMachinePage() {
           공통 실습으로 O, X, 배경을 구분하는 손 모양 이미지 분류 모델을 만듭니다.
         </p>
 
-        <h3 className="mb-2 text-sm font-semibold uppercase tracking-wide text-neutral-500">
-          지금 할 일
-        </h3>
-        <ol className="mb-6 list-decimal space-y-2 pl-5 text-neutral-800">
-          {steps.map((item, index) => (
-            <li key={index}>{item}</li>
-          ))}
-        </ol>
+        <div className="mb-6 flex flex-col gap-6 xl:flex-row xl:items-start">
+          <div className="xl:flex-1">
+            <h3 className="mb-2 text-sm font-semibold uppercase tracking-wide text-neutral-500">
+              지금 할 일
+            </h3>
+            <ol className="list-decimal space-y-2 pl-5 text-neutral-800">
+              {steps.map((item, index) => (
+                <li key={index}>{item}</li>
+              ))}
+            </ol>
+          </div>
+
+          <div className="xl:w-72 xl:shrink-0">
+            <h3 className="mb-2 text-sm font-semibold uppercase tracking-wide text-neutral-500">
+              화면 예시
+            </h3>
+            <div className="space-y-3">
+              <ScreenshotFigure id="teachable-machine-start" />
+              <ScreenshotFigure id="teachable-machine-labels" />
+              <ScreenshotFigure id="teachable-machine-train" />
+              <ScreenshotFigure id="teachable-machine-test" />
+              <ScreenshotFigure id="teachable-machine-export" />
+            </div>
+          </div>
+        </div>
 
         <h3 className="mb-2 text-sm font-semibold uppercase tracking-wide text-neutral-500">
           데이터 수집 안내

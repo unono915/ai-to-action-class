@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { ResourceButton } from '../components/ResourceButton'
 import { CompletionPanel } from '../components/CompletionPanel'
 import { TroubleshootingPanel } from '../components/TroubleshootingPanel'
+import { ScreenshotFigure } from '../components/ScreenshotFigure'
 import { externalLinks } from '../data/links'
 
 const steps = [
@@ -42,14 +43,28 @@ export function ActionRunnerPage() {
           모델은 판단합니다. 이제 그 판단에 따라 무엇을 할지 정해 봅니다.
         </p>
 
-        <h3 className="mb-2 text-sm font-semibold uppercase tracking-wide text-neutral-500">
-          지금 할 일
-        </h3>
-        <ol className="mb-4 list-decimal space-y-2 pl-5 text-neutral-800">
-          {steps.map((item, index) => (
-            <li key={index}>{item}</li>
-          ))}
-        </ol>
+        <div className="mb-4 flex flex-col gap-6 xl:flex-row xl:items-start">
+          <div className="xl:flex-1">
+            <h3 className="mb-2 text-sm font-semibold uppercase tracking-wide text-neutral-500">
+              지금 할 일
+            </h3>
+            <ol className="list-decimal space-y-2 pl-5 text-neutral-800">
+              {steps.map((item, index) => (
+                <li key={index}>{item}</li>
+              ))}
+            </ol>
+          </div>
+
+          <div className="xl:w-72 xl:shrink-0">
+            <h3 className="mb-2 text-sm font-semibold uppercase tracking-wide text-neutral-500">
+              화면 예시
+            </h3>
+            <div className="space-y-3">
+              <ScreenshotFigure id="action-runner-model" />
+              <ScreenshotFigure id="action-runner-actions" />
+            </div>
+          </div>
+        </div>
 
         <label className="mb-6 flex cursor-pointer items-center gap-2 rounded-lg border border-neutral-200 bg-white px-3 py-2 text-sm text-neutral-800">
           <input
@@ -90,6 +105,13 @@ export function ActionRunnerPage() {
               ))}
             </tbody>
           </table>
+        </div>
+
+        <div className="mb-6 max-w-xl">
+          <h3 className="mb-2 text-sm font-semibold uppercase tracking-wide text-neutral-500">
+            실제 결과 화면
+          </h3>
+          <ScreenshotFigure id="action-runner-test" highlight />
         </div>
 
         <div className="mb-6 rounded-lg border border-neutral-200 bg-white p-4">

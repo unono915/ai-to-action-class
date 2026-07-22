@@ -7,6 +7,7 @@ import {
   type PromptFields,
 } from '../data/prompts'
 import { CopyButton } from '../components/CopyButton'
+import { ScreenshotFigure } from '../components/ScreenshotFigure'
 
 const fieldConfig: { key: keyof PromptFields; label: string; multiline?: boolean }[] = [
   { key: 'subject', label: '교과' },
@@ -40,10 +41,17 @@ export function GemBuilderPage() {
         <span className="text-sm text-neutral-500">권장 15분</span>
       </div>
 
-      <p className="mb-6 text-neutral-600">
-        정답을 바로 알려주는 챗봇이 아니라, 학생의 설명을 듣고 빠진 부분을
-        질문하는 개념 체크 도우미를 만듭니다.
-      </p>
+      <div className="mb-6 flex flex-col gap-4 lg:flex-row lg:items-start">
+        <p className="text-neutral-600 lg:flex-1">
+          정답을 바로 알려주는 챗봇이 아니라, 학생의 설명을 듣고 빠진 부분을
+          질문하는 개념 체크 도우미를 만듭니다. 아래에서 지침을 만든 뒤,
+          Gemini의 Gem 만들기 화면에 붙여 넣어 이름과 요청 사항(지침)을
+          설정하고 미리보기로 테스트하세요.
+        </p>
+        <div className="lg:w-64 lg:shrink-0">
+          <ScreenshotFigure id="gem-builder" />
+        </div>
+      </div>
 
       <div className="mb-4 flex flex-wrap gap-2">
         {promptExamples.map((example) => (
