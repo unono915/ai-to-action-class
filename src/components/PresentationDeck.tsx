@@ -17,10 +17,16 @@ export function PresentationDeck({ step, slide }: Props) {
   const current = getSlide(step, slide)
   const total = slideCountForStep(step)
   const hasImage = Boolean(current.image)
+  const hasQuote = Boolean(current.quote)
 
   const headingClass = hasImage
     ? 'text-balance text-2xl font-bold leading-tight text-neutral-900 sm:text-3xl lg:text-4xl'
     : 'text-balance text-3xl font-bold leading-tight text-neutral-900 sm:text-5xl lg:text-6xl'
+
+  // 이미지와 인용이 함께 있으면 이미지 높이를 더 줄여 글자 밀림을 막는다.
+  const imageClass = hasQuote
+    ? 'max-h-[34vh] w-auto max-w-full rounded-xl border border-neutral-200 object-contain shadow-sm'
+    : 'max-h-[42vh] w-auto max-w-full rounded-xl border border-neutral-200 object-contain shadow-sm'
 
   return (
     <section
@@ -46,8 +52,19 @@ export function PresentationDeck({ step, slide }: Props) {
         <img
           src={lessonImageUrl(current.image)}
           alt={lessonImages[current.image].alt}
-          className="max-h-[42vh] w-auto max-w-full rounded-xl border border-neutral-200 object-contain shadow-sm"
+          className={imageClass}
         />
+      )}
+
+      {current.quote && (
+        <figure className="max-w-3xl">
+          <blockquote className="text-lg font-medium text-brand-800 sm:text-2xl">
+            “{current.quote.text}”
+          </blockquote>
+          <figcaption className="mt-1 text-sm text-neutral-400 sm:text-base">
+            — {current.quote.who}
+          </figcaption>
+        </figure>
       )}
 
       {current.bullets && (

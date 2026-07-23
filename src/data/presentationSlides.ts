@@ -19,15 +19,18 @@ export type Slide = {
   note?: string
   /** 함께 띄울 수업 교안 이미지 */
   image?: LessonImageId
+  /** 교실에서 실제로 오간 말 (따옴표 강조) */
+  quote?: { text: string; who: string }
 }
 
 // 2단계(왜 이런 수업인가)는 발표자의 실제 수업 사례로 철학을 풀어낸다.
-// lessonNarrative를 슬라이드로 매핑한다(이미지 포함).
+// lessonNarrative를 슬라이드로 매핑한다(이미지·인용 포함).
 const philosophySlides: Slide[] = lessonNarrative.map((beat) => ({
   eyebrow: beat.eyebrow,
   lines: beat.heading,
   note: beat.note,
   image: beat.image,
+  quote: beat.quote,
 }))
 
 const slidesByStep: Record<StepId, Slide[]> = {

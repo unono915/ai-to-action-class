@@ -30,7 +30,7 @@ export const steps: Step[] = [
     shortTitle: '수업 철학',
     summary: '실제 수업 사례로 ‘판단을 행동으로 잇는’ 철학을 나눕니다.',
     presentationHeadline: '판단을 행동으로 연결하면 수업이 달라집니다.',
-    durationMinutes: 10,
+    durationMinutes: 12,
   },
   {
     id: 3,
