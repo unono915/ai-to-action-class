@@ -18,17 +18,20 @@
 4. `docs/03_IMPLEMENTATION_GUIDE.md`
 5. `docs/04_CONTENT_AND_LINKS_SPEC.md`
 6. `docs/05_SITE_CONTENT_DRAFT.md`
+7. `docs/07_HANDOFF_STATE.md` — **개발 대화에서 확정된 최신 설계 의도와 현재 상태.
+   초기 문서(00~05)와 충돌하면 이 문서가 우선한다.**
 
 ## 문서 우선순위
 
 문서 간 충돌이 있으면 아래 순서를 따른다.
 
 1. 사용자의 현재 명시적 요청
-2. `docs/00_PROJECT_DECISIONS.md`
-3. `docs/03_IMPLEMENTATION_GUIDE.md`
-4. `docs/01_PRD.md`
-5. `docs/02_WIREFRAME.md`
-6. `docs/05_SITE_CONTENT_DRAFT.md`
+2. `docs/07_HANDOFF_STATE.md` (개발 진행 중 확정된 최신 결정)
+3. `docs/00_PROJECT_DECISIONS.md`
+4. `docs/03_IMPLEMENTATION_GUIDE.md`
+5. `docs/01_PRD.md`
+6. `docs/02_WIREFRAME.md`
+7. `docs/05_SITE_CONTENT_DRAFT.md`
 
 기능 요구는 PRD를 우선하고, 화면 배치는 와이어프레임을 참고한다.
 중대한 충돌이나 자료 누락이 아니라면 질문만 하고 멈추지 말고 합리적인 기본값으로 진행한다.

@@ -1,0 +1,88 @@
+# 개발 인수인계 · 현재 상태 (2026-07-23 기준)
+
+이 문서는 초기 기획 문서(00~06) 이후, 실제 개발 대화에서 **확정된 설계 의도와
+현재 상태**를 기록한다. 다른 환경에서 개발을 이어받을 때 이 문서를 먼저 읽으면
+대화 맥락 없이도 같은 방향으로 작업할 수 있다.
+
+## 1. 배포 상태
+
+- 라이브: <https://unono915.github.io/ai-to-action-class/> — **정상 작동 확인됨**
+- GitHub Pages Source는 **GitHub Actions**로 설정되어 있음 (main push 시 자동 배포)
+- 발표자용 숨은 페이지: `/cuesheet.html` — 큐시트+전체 대본.
+  **앱 어디에도 링크하지 않는다** (주소 직접 입력 전용, noindex). 이 원칙 유지할 것.
+
+## 2. 대화에서 확정된 핵심 설계 의도 (문서 00~06과 다르거나 추가된 것)
+
+1. **발표 모드 = 슬라이드 덱.** 발표자 메모·별도 기능을 넣는 화면이 아니라,
+   실습 모드와 같은 내용을 발표용 슬라이드처럼 크게 띄우는 용도.
+   타이머·전체화면·권장시간 배지만 유지. `presentationSlides.ts`가 소스.
+2. **2단계는 '수업 나눔'.** '수업 철학'이라는 프레임을 앞세우지 않는다.
+   실제 수업 「이미지 분류 모델로 프로그램 움직이기」(2026-06-05 고1 연구수업)를
+   **시간순으로 따라가는 사례 나눔이 뼈대**이고, 철학은 생각이 실제 담긴 장면에만
+   `insight`(「이 장면에 담긴 생각」) 한 줄로 스민다. 철학을 위해 사례를
+   끼워 맞추지 않는다. 소스: `lessonNarrative.ts` (18개 장면).
+3. **행사 진행 구조: PPT → 웹 → PPT.** 발표자 PPT(8장)로 열고, PPT 5번
+   슬라이드의 링크로 참가자가 이 사이트에 접속, 모든 나눔·실습은 웹에서,
+   Q&A·마무리는 다시 PPT. 그래서 **사이트 안에 참가자용 QR은 넣지 않는다**.
+4. **5단계 아이디어 코치 Gem 섹션은 버튼 2개만.** 실제 Gem은 긴 질문 순서로
+   진행되지 않으므로 정리 입력칸·저장 기능 없이 "간단한 질문으로 아이디어
+   얻기" 안내 + Gem 열기 + Padlet 공유만.
+5. **타이머는 스톱워치 유지** (카운트다운 불필요). 발표 모드 하단에
+   단계별 `권장 N분` 배지 표시.
+6. 실습은 각자 노트북 진행이라 **인원수(40명)와 소요 시간은 무관** —
+   운영 포인트는 순회 코칭과 예시 모델 안전망.
+
+## 3. 데이터 구조 (2차 개발 이후 추가분)
+
+```text
+src/data/
+  lessonNarrative.ts   2단계 수업 나눔 18장면 (story/insight/quote/image/photo)
+                       + lessonOverview(지도안 개요) + lessonTools(도구 4종 효과)
+  lessonImages.ts      교안 PDF에서 추출한 슬라이드 13장 (public/assets/lesson/)
+  classPhotos.ts       실제 수업 현장 사진 6장 (public/assets/class/, EXIF 제거됨)
+  presentationSlides.ts 발표 모드 전체 슬라이드 (2단계는 lessonNarrative 매핑)
+  screenshots.ts       실습 안내용 도구 캡처 12장 (public/assets/screenshots/)
+```
+
+- 이미지 표시 규칙: 장면에 `photo`(현장 사진)가 있으면 `image`(교안)보다 우선.
+- 교안 이미지 순서는 원본 PDF 페이지 순서(=수업 진행 순서)와 일치시켜 두었음.
+
+## 4. 저장소에 없는 원본 자료 (이 PC/OneDrive에만 있음)
+
+`.gitignore` 처리되어 클론해도 받아지지 않는다. 재추출 필요 시 원본 위치:
+
+- 수업 교안 PDF(19쪽): `assets/수업 나눔 사례 교안.pdf` (원본은 OneDrive 발표 준비 폴더)
+- 수업 현장 사진 원본 6장: `assets/class/*.png` (웹용 webp는 저장소에 포함됨)
+- 발표 PPT·지도안(hwpx)·신청서(md): OneDrive
+  `4. 연구회 및 대외 활동/7. 2026 AI·디지털 러닝 페스티벌·컨퍼런스/2. 발표 자료 준비/`
+
+사이트 동작에 필요한 파일은 전부 `public/assets/`에 커밋되어 있으므로
+**클론만으로 빌드·배포는 완전하다.**
+
+## 5. 미해결·보류 항목
+
+- ⚠️ **개인정보(공개 전 확인)**: `class-action-test.webp`·`class-play.webp`
+  (전자칠판에 학생 얼굴 정면), `class-data-collection.webp`(일부 얼굴),
+  `class-padlet.webp`(이름 1건 "10111박지우") 노출.
+  도구 캡처 4장(gem-builder*, notebook-knowledge*)에도 계정명 "윤호" 노출.
+  → 초상권 동의 확인 또는 가림 버전으로 교체 필요. 코드로 모자이크하지 않기로 함.
+- `downloads`(전체 자료 다운로드) 링크: 미확정 → `links.ts`에서 pending 유지
+- 6단계 "Gemini Gems 열기" 버튼: 공식 URL 미확정 → pending 유지
+- 메인 히어로 이미지: `public/assets/hero/main-hero.png` 미배치(placeholder 동작 중).
+  `assets/hero/main-hero.png`에 시안이 있으나 **디자인 참고용**으로만 쓰기로 함.
+- 저장소 루트의 `package-lock-N지윤호.json`은 OneDrive 동기화 충돌 사본(무시/삭제 가능)
+
+## 6. 발표 운영 자료
+
+- 큐시트+대본: `public/cuesheet.html` (../cuesheet.html 로 접속) — 수정 시
+  이 파일을 직접 편집하면 배포에 포함된다.
+- 80분 배분: PPT 오프닝 7분 → STEP1 3분 → STEP2 수업나눔 12분(18장) →
+  STEP3 실습 15분 → STEP4 실습 12분 → STEP5 11분 → STEP6 7분(밸브) →
+  STEP7 2분(데모) → STEP8 1분 → PPT Q&A 10분
+
+## 7. 작업 방식 (대화에서 형성된 규칙)
+
+- 변경 후 `npm run lint` + `npm run build` 통과 → 논리 단위 커밋 → main push
+  → 라이브 반영(빌드 해시)까지 확인하고 보고
+- 콘텐츠 문구는 발표자의 실제 자료(지도안·신청서·교안)에서 가져오고 창작하지 않기
+- 톤: 딱딱한 강의가 아니라 편하게 수업 사례를 나누는 발표
