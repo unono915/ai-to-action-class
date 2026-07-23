@@ -10,6 +10,7 @@ import {
   type PromptFields,
 } from '../data/prompts'
 import { CopyButton } from '../components/CopyButton'
+import { ResourceButton } from '../components/ResourceButton'
 import { ScreenshotFigure } from '../components/ScreenshotFigure'
 
 type FieldConfig = {
@@ -272,6 +273,7 @@ export function GemBuilderPage() {
                 label="메타 프롬프트 복사"
                 disabled={!isReady}
               />
+              <ResourceButton linkKey="gemini" />
             </div>
 
             <p className="mt-2 min-h-5 text-xs text-green-700" role="status">
@@ -312,14 +314,6 @@ export function GemBuilderPage() {
             학습 성취를 보장하지 않습니다.
           </div>
 
-          <div>
-            <span className="inline-flex items-center gap-2 rounded-lg border border-dashed border-neutral-300 bg-neutral-100 px-4 py-2 text-sm font-medium text-neutral-500">
-              Gemini Gems 열기
-              <span className="rounded-full bg-neutral-200 px-2 py-0.5 text-xs text-neutral-600">
-                준비 중
-              </span>
-            </span>
-          </div>
         </div>
       </div>
     </section>

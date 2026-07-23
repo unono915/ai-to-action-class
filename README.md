@@ -117,7 +117,7 @@ npm run preview  # 빌드 결과 로컬 미리보기
 - **비어 있는 URL을 임의로 채우지 않습니다.** URL이 확정되면 이 파일만 수정하면 됩니다.
 
 현재 확정 링크: Teachable Machine, 행동 연결 사이트, 교과별 아이디어 코치 Gem,
-Padlet, 예시 모델.
+Gemini, Padlet, 예시 모델.
 
 ## 이미지 교체
 
@@ -162,7 +162,6 @@ public/assets/
 ## 아직 확정되지 않은(pending) 자료
 
 - **전체 자료 다운로드**(`downloads`): 자료 구성 확정 전까지 `준비 중` 비활성.
-- **Gemini Gems 열기 버튼**(6단계): 공식 진입 URL 미확정으로 `준비 중` 표시.
 - **메인 hero 이미지**: 최종본 확정 시 `public/assets/hero/main-hero.png` 교체.
 - **일부 캡처의 개인정보**: Gemini/Notebook 캡처 좌측 하단 계정 아바타와 Notebook 문서명이
   보일 수 있으므로, 공개 배포 전 계정 정보가 없는 화면으로 재캡처 권장.

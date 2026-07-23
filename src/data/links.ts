@@ -48,6 +48,13 @@ export const externalLinks = {
     status: 'active',
     description: '문제가 있을 때 사용할 수 있는 공용 예시 모델',
   },
+  gemini: {
+    key: 'gemini',
+    label: 'Gemini에서 입력하기',
+    url: 'https://gemini.google.com/',
+    status: 'active',
+    description: '다운로드하거나 복사한 메타 프롬프트를 입력하는 생성형 AI',
+  },
   // 미확정: 전체 자료 다운로드 구성이 확정되기 전에는 비활성으로 둔다.
   downloads: {
     key: 'downloads',

@@ -74,7 +74,9 @@ src/data/
   도구 캡처 4장(gem-builder*, notebook-knowledge*)에도 계정명 "윤호" 노출.
   → 초상권 동의 확인 또는 가림 버전으로 교체 필요. 코드로 모자이크하지 않기로 함.
 - `downloads`(전체 자료 다운로드) 링크: 미확정 → `links.ts`에서 pending 유지
-- 6단계 "Gemini Gems 열기" 버튼: 공식 URL 미확정 → pending 유지
+- 6단계는 메타 프롬프트 다운로드·복사 버튼 옆에서 Gemini 홈
+  (`https://gemini.google.com/`)을 새 탭으로 연다. Gem 제작 전용 주소가 아니라
+  생성형 AI에 메타 프롬프트를 입력하기 위한 진입 버튼이다.
 - 메인 히어로 이미지: `public/assets/hero/main-hero.png` 미배치(placeholder 동작 중).
   `assets/hero/main-hero.png`에 시안이 있으나 **디자인 참고용**으로만 쓰기로 함.
 - 저장소 루트의 `package-lock-N지윤호.json`은 OneDrive 동기화 충돌 사본(무시/삭제 가능)
