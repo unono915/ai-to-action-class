@@ -10,7 +10,7 @@ type Props = {
 
 const resourceLinks: { label: string; onClick: (props: Props) => void }[] = [
   { label: '실습 안내 (분류 모델 만들기)', onClick: (p) => p.onJumpToStep(3) },
-  { label: '프롬프트 (Gem 만들기)', onClick: (p) => p.onJumpToStep(6) },
+  { label: '메타 프롬프트 (Gem 만들기)', onClick: (p) => p.onJumpToStep(6) },
   { label: '교과 사례 (내 교과로 확장하기)', onClick: (p) => p.onJumpToStep(5) },
   { label: '오류 해결 (도움말)', onClick: (p) => p.onOpenHelp() },
 ]

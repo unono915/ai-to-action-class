@@ -76,7 +76,7 @@ export const screenshots: Record<ScreenshotId, Screenshot> = {
     id: 'gem-builder',
     file: 'gem-builder.png',
     alt: 'Gemini Gem 만들기 화면에서 이름, 설명, 요청 사항, 지식 항목을 입력하고 오른쪽 미리보기에서 Gem을 확인하는 화면',
-    caption: 'Gem 이름과 요청 사항(지침)을 입력하고 오른쪽 미리보기로 확인합니다.',
+    caption: '생성형 AI가 만든 요청사항을 Gem에 붙여 넣고 지식 자료를 추가합니다.',
   },
   'gem-builder-study': {
     id: 'gem-builder-study',

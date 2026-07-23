@@ -3,6 +3,7 @@ import { useRef, useState } from 'react'
 type Props = {
   text: string
   label?: string
+  disabled?: boolean
 }
 
 /**
@@ -10,11 +11,13 @@ type Props = {
  * 숨겨진 textarea를 선택해 execCommand('copy')로 대체하고,
  * 그마저 실패하면 직접 선택해 복사하라는 안내를 보여준다.
  */
-export function CopyButton({ text, label = '복사' }: Props) {
+export function CopyButton({ text, label = '복사', disabled = false }: Props) {
   const [status, setStatus] = useState<'idle' | 'copied' | 'failed'>('idle')
   const fallbackRef = useRef<HTMLTextAreaElement>(null)
 
   const handleCopy = async () => {
+    if (disabled) return
+
     try {
       if (navigator.clipboard && window.isSecureContext) {
         await navigator.clipboard.writeText(text)
@@ -47,7 +50,8 @@ export function CopyButton({ text, label = '복사' }: Props) {
       <button
         type="button"
         onClick={handleCopy}
-        className="inline-flex items-center gap-2 rounded-lg border border-neutral-300 bg-white px-4 py-2 text-sm font-semibold text-neutral-700 transition hover:bg-neutral-100"
+        disabled={disabled}
+        className="inline-flex items-center gap-2 rounded-lg border border-neutral-300 bg-white px-4 py-2 text-sm font-semibold text-neutral-700 transition hover:bg-neutral-100 disabled:cursor-not-allowed disabled:bg-neutral-100 disabled:text-neutral-400"
       >
         {label}
       </button>

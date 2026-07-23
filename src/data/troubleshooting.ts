@@ -93,9 +93,9 @@ export const troubleshootingEntries: TroubleshootingEntry[] = [
   {
     id: 'gem-copy-failed',
     category: 'gem',
-    question: '지침 복사가 안 돼요.',
+    question: '메타 프롬프트 복사나 다운로드가 안 돼요.',
     answer:
-      '복사 버튼이 동작하지 않으면 표시된 텍스트를 직접 선택(드래그)한 뒤 Ctrl+C(Cmd+C)로 복사하세요.',
+      '필수 항목을 모두 입력했는지 확인하세요. 복사 버튼이 동작하지 않으면 미리보기를 펼쳐 텍스트를 직접 선택한 뒤 Ctrl+C(Cmd+C)로 복사하세요.',
   },
   {
     id: 'notebook-menu-missing',

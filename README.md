@@ -87,11 +87,25 @@ npm run preview  # 빌드 결과 로컬 미리보기
 | 발표 슬라이드 문구 | [`src/data/presentationSlides.ts`](src/data/presentationSlides.ts) |
 | 2단계 발표 장면 | [`src/data/presentationScenes.ts`](src/data/presentationScenes.ts) |
 | 교과별 사례 카드 | [`src/data/subjectExamples.ts`](src/data/subjectExamples.ts) |
-| Gem 프롬프트 템플릿·예시 | [`src/data/prompts.ts`](src/data/prompts.ts) |
+| Gem 메타 프롬프트 조합·입력 예시 | [`src/data/prompts.ts`](src/data/prompts.ts) |
+| Gem 메타 프롬프트 본문 | [`src/data/gemMetaPromptTemplate.md`](src/data/gemMetaPromptTemplate.md) |
 | 도움말·오류 해결 Q&A | [`src/data/troubleshooting.ts`](src/data/troubleshooting.ts) |
 | 화면 캡처 설명·alt | [`src/data/screenshots.ts`](src/data/screenshots.ts) |
 
 각 단계 화면 자체는 `src/pages/`의 페이지 컴포넌트가 담당합니다.
+
+### 6단계 Gem 제작 흐름
+
+6단계에서는 입력값으로 짧은 Gem 지침을 바로 만들지 않습니다.
+
+1. 교과·학년·개념·오개념 등 수업 정보를 입력합니다.
+2. 사이트가 입력값을 반영한 메타 프롬프트 `.md` 파일을 브라우저에서 생성합니다.
+3. 참가자가 파일 내용을 생성형 AI에 입력합니다.
+4. AI가 만든 Gem 요청사항과 지식 자료 초안을 교사가 검토합니다.
+5. 검토한 요청사항과 지식 자료를 Gem 제작 화면에 적용합니다.
+
+사이트는 이 과정에서 생성형 AI API를 호출하거나 입력 내용을 외부로 전송하지 않습니다.
+필수 항목이 비어 있으면 메타 프롬프트 복사와 다운로드가 비활성화됩니다.
 
 ## 외부 링크 수정
 
@@ -142,7 +156,7 @@ public/assets/
    버튼을 누르면 **새 탭**에서 열리고, 이 교안 탭은 그대로 남습니다.
 6. 참가자 실습 중 문제가 생기면 상단 **도움말**(검색·카테고리)에서 오류 해결을 안내.
 7. 실습·발표 상태는 URL(`?mode=&step=&scene=`)에 담겨 새로고침·공유해도 유지됩니다.
-8. 완료 체크와 Gem 프롬프트 초안은 각자 브라우저 localStorage에만 저장됩니다.
+8. 완료 체크와 Gem 메타 프롬프트 입력값은 각자 브라우저 localStorage에만 저장됩니다.
    민감정보(비밀번호·주민등록번호 등)는 입력하지 않도록 안내합니다.
 
 ## 아직 확정되지 않은(pending) 자료
@@ -157,6 +171,6 @@ public/assets/
 
 - 개인정보를 수집하거나 전송하지 않습니다.
 - API 키를 사용하지 않습니다.
-- localStorage에는 완료 단계·마지막 단계·Gem 프롬프트 초안 등 최소 상태만 저장합니다.
+- localStorage에는 완료 단계·마지막 단계·Gem 메타 프롬프트 입력값 등 최소 상태만 저장합니다.
 - 외부 도구(Teachable Machine·Gemini·행동 연결 사이트)는 이 사이트 안에서 실행하지 않고
   새 탭 링크로만 연결합니다.

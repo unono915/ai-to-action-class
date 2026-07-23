@@ -60,8 +60,8 @@ export const steps: Step[] = [
     id: 6,
     title: '나만의 Gem 만들기',
     shortTitle: 'Gem 만들기',
-    summary: '학생의 개념 이해를 점검하는 나만의 Gem 지침을 설계합니다.',
-    presentationHeadline: '개념을 되묻는 질문 파트너를 만듭니다.',
+    summary: '수업 정보를 반영한 메타 프롬프트로 Gem 요청사항과 지식 초안을 설계합니다.',
+    presentationHeadline: 'Gem을 만들기 전에 설계 프롬프트부터 만듭니다.',
     durationMinutes: 15,
   },
   {
