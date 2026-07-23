@@ -23,7 +23,7 @@ export type Slide = {
   quote?: { text: string; who: string }
 }
 
-// 2단계(왜 이런 수업인가)는 발표자의 실제 수업 사례로 철학을 풀어낸다.
+// 2단계(수업 나눔)는 발표자의 실제 수업 한 편을 시간순으로 따라간다.
 // lessonNarrative를 슬라이드로 매핑한다(이미지·인용 포함).
 const philosophySlides: Slide[] = lessonNarrative.map((beat) => ({
   eyebrow: beat.eyebrow,

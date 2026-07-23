@@ -18,7 +18,7 @@ import { PresentationControls } from '../components/PresentationControls'
 import { PresentationDeck } from '../components/PresentationDeck'
 import { HelpPanel } from '../components/HelpPanel'
 import { StartPage } from '../pages/StartPage'
-import { PhilosophyPracticePage } from '../pages/PhilosophyPracticePage'
+import { LessonSharingPage } from '../pages/LessonSharingPage'
 import { TeachableMachinePage } from '../pages/TeachableMachinePage'
 import { ActionRunnerPage } from '../pages/ActionRunnerPage'
 import { SubjectIdeasPage } from '../pages/SubjectIdeasPage'
@@ -122,7 +122,7 @@ export default function App() {
       case 1:
         return <StartPage onStartMode={startMode} />
       case 2:
-        return <PhilosophyPracticePage />
+        return <LessonSharingPage />
       case 3:
         return <TeachableMachinePage />
       case 4:

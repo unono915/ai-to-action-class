@@ -6,26 +6,23 @@ import {
 import { LessonFigure } from '../components/LessonFigure'
 
 /**
- * 2단계 「왜 이런 수업인가 — 수업 사례로 보는 철학」.
- * 발표자의 실제 수업 「이미지 분류 모델로 프로그램 움직이기」를 따라가며
- * ① 어떤 수업이었는지(개요) ② 철학이 어느 장면에 어떻게 녹아 있었는지(흐름)
- * ③ 어떤 도구를 왜 썼고 효과는 어땠는지(도구)를 함께 보여 준다.
+ * 2단계 「수업 나눔」.
+ * 발표자의 실제 수업 「이미지 분류 모델로 프로그램 움직이기」를
+ * 처음부터 끝까지 시간순으로 따라간다. 사례가 뼈대이고,
+ * 생각(철학)은 실제로 담겼던 장면에만 「이 장면에 담긴 생각」으로 스민다.
  * (발표 모드에서는 같은 흐름을 슬라이드로 크게 보여 준다 — PresentationDeck)
  */
-export function PhilosophyPracticePage() {
+export function LessonSharingPage() {
   return (
-    <section aria-label="왜 이런 수업인가" className="px-4 py-6">
+    <section aria-label="수업 나눔" className="px-4 py-6">
       <div className="mb-2 flex flex-wrap items-baseline gap-x-3 gap-y-1">
-        <h2 className="text-2xl font-bold text-neutral-900">
-          2. 왜 이런 수업인가
-        </h2>
-        <span className="text-sm text-neutral-500">수업 사례로 보는 철학</span>
+        <h2 className="text-2xl font-bold text-neutral-900">2. 수업 나눔</h2>
+        <span className="text-sm text-neutral-500">실제 수업 한 편을 그대로</span>
       </div>
       <p className="mb-6 max-w-3xl text-neutral-600">
-        제가 진행한 수업 「{lessonOverview.title}」를 따라가며,
-        <b className="font-semibold text-neutral-800"> ‘판단을 행동으로 잇는다’</b>는
-        수업 철학이 수업의 어느 장면에 어떻게 담겨 있었는지 함께 살펴봅니다.
-        각 이미지를 누르면 크게 볼 수 있습니다.
+        제가 진행한 수업 「{lessonOverview.title}」를 처음부터 끝까지
+        따라가며, 그 장면들 속에 담긴 고민과 배움을 나눕니다. 각 이미지를
+        누르면 크게 볼 수 있습니다.
       </p>
 
       {/* 어떤 수업이었나 — 지도안 기반 개요 */}
@@ -61,9 +58,9 @@ export function PhilosophyPracticePage() {
         </dl>
       </div>
 
-      {/* 철학이 녹아든 수업 장면들 */}
+      {/* 수업의 흐름 그대로 — 장면별 나눔 */}
       <h3 className="mb-3 text-sm font-semibold uppercase tracking-wide text-neutral-500">
-        철학이 녹아든 수업 장면
+        수업의 흐름 그대로
       </h3>
       <ol className="space-y-5">
         {lessonNarrative.map((beat, index) => (
@@ -80,19 +77,15 @@ export function PhilosophyPracticePage() {
                     </span>
                   </div>
 
-                  <h3 className="mb-4 text-xl font-bold leading-snug text-neutral-900">
+                  <h3 className="mb-3 text-xl font-bold leading-snug text-neutral-900">
                     {beat.heading.join(' ')}
                   </h3>
 
-                  <div className="space-y-3">
-                    <div className="rounded-lg border-l-4 border-brand-300 bg-brand-50/60 px-3 py-2">
-                      <p className="text-xs font-semibold text-brand-700">수업 철학</p>
-                      <p className="text-sm text-neutral-800">{beat.philosophy}</p>
-                    </div>
-                    <div className="rounded-lg border-l-4 border-green-300 bg-green-50/60 px-3 py-2">
-                      <p className="text-xs font-semibold text-green-700">수업에서는</p>
-                      <p className="text-sm text-neutral-800">{beat.lesson}</p>
-                    </div>
+                  <p className="text-[15px] leading-relaxed text-neutral-700">
+                    {beat.story}
+                  </p>
+
+                  <div className="mt-3 space-y-3">
                     {beat.quote && (
                       <figure className="rounded-lg border-l-4 border-amber-300 bg-amber-50/70 px-3 py-2">
                         <blockquote className="text-sm font-medium text-neutral-900">
@@ -102,6 +95,14 @@ export function PhilosophyPracticePage() {
                           — {beat.quote.who}
                         </figcaption>
                       </figure>
+                    )}
+                    {beat.insight && (
+                      <div className="rounded-lg border-l-4 border-brand-300 bg-brand-50/60 px-3 py-2">
+                        <p className="text-xs font-semibold text-brand-700">
+                          이 장면에 담긴 생각
+                        </p>
+                        <p className="text-sm text-neutral-800">{beat.insight}</p>
+                      </div>
                     )}
                   </div>
                 </div>
