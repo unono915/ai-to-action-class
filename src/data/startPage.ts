@@ -3,7 +3,7 @@ export const startHeroMessage =
 
 export const startHeroImage = {
   path: 'assets/hero/start-hero-v2.webp',
-  alt: '컴퓨터실에서 교사가 동료 교사들과 손동작 이미지 입력, AI 판단, 말풍선·이미지·아이디어·수업 행동으로 이어지는 흐름을 설계하는 모습',
+  alt: '컴퓨터실에서 남성 발표자가 동료 교사들과 손동작 이미지 입력, AI 판단, 말풍선·이미지·아이디어·수업 행동으로 이어지는 흐름을 설계하는 모습',
 } as const
 
 export function startHeroImageUrl(): string {
