@@ -1,6 +1,7 @@
 import { eventInfo } from './event'
 import { lessonNarrative } from './lessonNarrative'
 import type { LessonImageId } from './lessonImages'
+import type { ClassPhotoId } from './classPhotos'
 import type { StepId } from './steps'
 
 // 발표 모드 슬라이드 데이터.
@@ -17,19 +18,22 @@ export type Slide = {
   bullets?: string[]
   /** 하단 작은 보조 문구 */
   note?: string
-  /** 함께 띄울 수업 교안 이미지 */
+  /** 함께 띄울 수업 교안(PPT) 이미지 */
   image?: LessonImageId
+  /** 함께 띄울 실제 수업 현장 사진 (image보다 우선) */
+  photo?: ClassPhotoId
   /** 교실에서 실제로 오간 말 (따옴표 강조) */
   quote?: { text: string; who: string }
 }
 
 // 2단계(수업 나눔)는 발표자의 실제 수업 한 편을 시간순으로 따라간다.
-// lessonNarrative를 슬라이드로 매핑한다(이미지·인용 포함).
+// lessonNarrative를 슬라이드로 매핑한다(교안 이미지·현장 사진·인용 포함).
 const philosophySlides: Slide[] = lessonNarrative.map((beat) => ({
   eyebrow: beat.eyebrow,
   lines: beat.heading,
   note: beat.note,
   image: beat.image,
+  photo: beat.photo,
   quote: beat.quote,
 }))
 

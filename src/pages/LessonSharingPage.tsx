@@ -2,8 +2,30 @@ import {
   lessonNarrative,
   lessonOverview,
   lessonTools,
+  type NarrativeBeat,
 } from '../data/lessonNarrative'
+import { lessonImages, lessonImageUrl } from '../data/lessonImages'
+import { classPhotos, classPhotoUrl } from '../data/classPhotos'
 import { LessonFigure } from '../components/LessonFigure'
+
+// 현장 사진(photo)을 교안 이미지(image)보다 우선해 표시할 정보를 고른다.
+function beatFigure(beat: NarrativeBeat) {
+  if (beat.photo) {
+    return {
+      src: classPhotoUrl(beat.photo),
+      alt: classPhotos[beat.photo].alt,
+      photo: true,
+    }
+  }
+  if (beat.image) {
+    return {
+      src: lessonImageUrl(beat.image),
+      alt: lessonImages[beat.image].alt,
+      photo: false,
+    }
+  }
+  return null
+}
 
 /**
  * 2단계 「수업 나눔」.
@@ -63,7 +85,9 @@ export function LessonSharingPage() {
         수업의 흐름 그대로
       </h3>
       <ol className="space-y-5">
-        {lessonNarrative.map((beat, index) => (
+        {lessonNarrative.map((beat, index) => {
+          const figure = beatFigure(beat)
+          return (
           <li key={beat.id}>
             <article className="rounded-xl border border-neutral-200 bg-white p-5">
               <div className="grid gap-5 lg:grid-cols-[1fr_300px] lg:items-start">
@@ -107,15 +131,20 @@ export function LessonSharingPage() {
                   </div>
                 </div>
 
-                {beat.image && (
+                {figure && (
                   <div className="lg:pt-1">
-                    <LessonFigure id={beat.image} />
+                    <LessonFigure
+                      src={figure.src}
+                      alt={figure.alt}
+                      photo={figure.photo}
+                    />
                   </div>
                 )}
               </div>
             </article>
           </li>
-        ))}
+          )
+        })}
       </ol>
 
       {/* 사용한 도구 · 왜 그 도구였나 · 효과 */}
