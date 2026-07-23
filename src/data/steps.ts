@@ -36,16 +36,18 @@ export const steps: Step[] = [
     id: 3,
     title: '분류 모델 만들기',
     shortTitle: '모델 만들기',
-    summary: 'Teachable Machine으로 손 모양(O·X·배경) 분류 모델을 만듭니다.',
-    presentationHeadline: '먼저 판단하는 모델을 만들어 봅니다.',
+    summary:
+      'Teachable Machine에서 손 모양 모델을 만들고 다음 단계에서 사용할 URL을 복사합니다.',
+    presentationHeadline: 'O·X·배경 모델과 공유 URL을 만듭니다.',
     durationMinutes: 15,
   },
   {
     id: 4,
     title: '판단을 행동으로',
     shortTitle: '행동 연결',
-    summary: '모델의 판단 결과에 텍스트·이미지 행동을 연결합니다.',
-    presentationHeadline: '이제 판단에 따라 무엇을 할지 정합니다.',
+    summary:
+      '모델 URL을 연결하고 손동작에 따라 문구와 이미지가 바뀌는지 확인합니다.',
+    presentationHeadline: '손동작에 따라 문구와 이미지가 바뀌게 합니다.',
     durationMinutes: 12,
   },
   {

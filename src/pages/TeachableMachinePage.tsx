@@ -1,146 +1,105 @@
-import { useState } from 'react'
 import { ResourceButton } from '../components/ResourceButton'
-import { CompletionPanel } from '../components/CompletionPanel'
-import { TroubleshootingPanel } from '../components/TroubleshootingPanel'
 import { ScreenshotFigure } from '../components/ScreenshotFigure'
-
-const steps = [
-  'Teachable Machine에 접속합니다.',
-  '이미지 프로젝트를 선택합니다.',
-  '레이블을 O, X, 배경으로 설정합니다.',
-  '웹캠으로 각 레이블의 데이터를 수집합니다.',
-  '모델을 훈련합니다.',
-  '조건(거리·각도·배경)을 바꾸어 테스트합니다.',
-  '오류가 나온다면 원인을 추론합니다.',
-  '모델 내보내기를 준비합니다.',
-]
-
-const dataTips = [
-  '손 위치를 조금씩 바꿔 주세요.',
-  '카메라와의 거리를 바꿔 주세요.',
-  '손의 각도를 바꿔 주세요.',
-  '각 레이블의 데이터 수를 비슷하게 맞춰 주세요.',
-  '배경 레이블에는 손동작이 없는 화면을 담아 주세요.',
-]
-
-const testMissions = [
-  '손의 거리를 바꾸어 보기',
-  '배경을 바꾸어 보기',
-  '손의 각도를 바꾸어 보기',
-  '일부러 애매한 동작 보여주기',
-]
-
-const completionItems = [
-  'O·X·배경 데이터를 모두 수집했다.',
-  '레이블별 데이터 수를 비슷하게 맞췄다.',
-  '모델 훈련을 완료했다.',
-  '테스트 미션을 수행했다.',
-]
+import { TroubleshootingPanel } from '../components/TroubleshootingPanel'
+import { modelBuildingWorkflow } from '../data/practiceWorkflows'
 
 export function TeachableMachinePage() {
-  const [errorNote, setErrorNote] = useState('')
-
   return (
-    <section
-      aria-label="분류 모델 만들기"
-      className="grid grid-cols-1 gap-6 px-4 py-6 xl:grid-cols-[1fr_320px]"
-    >
-      <div>
-        <div className="mb-4 flex flex-wrap items-baseline gap-x-3 gap-y-1">
-          <h2 className="text-2xl font-bold text-neutral-900">3. 분류 모델 만들기</h2>
-          <span className="text-sm text-neutral-500">권장 15분</span>
-        </div>
-
-        <p className="mb-6 text-neutral-600">
-          공통 실습으로 O, X, 배경을 구분하는 손 모양 이미지 분류 모델을 만듭니다.
-        </p>
-
-        <div className="mb-6 flex flex-col gap-6 xl:flex-row xl:items-start">
-          <div className="xl:flex-1">
-            <h3 className="mb-2 text-sm font-semibold uppercase tracking-wide text-neutral-500">
-              지금 할 일
-            </h3>
-            <ol className="list-decimal space-y-2 pl-5 text-neutral-800">
-              {steps.map((item, index) => (
-                <li key={index}>{item}</li>
-              ))}
-            </ol>
-          </div>
-
-          <div className="xl:w-72 xl:shrink-0">
-            <h3 className="mb-2 text-sm font-semibold uppercase tracking-wide text-neutral-500">
-              화면 예시
-            </h3>
-            <div className="space-y-3">
-              <ScreenshotFigure id="teachable-machine-start" />
-              <ScreenshotFigure id="teachable-machine-labels" />
-              <ScreenshotFigure id="teachable-machine-train" />
-              <ScreenshotFigure id="teachable-machine-test" />
-              <ScreenshotFigure id="teachable-machine-export" />
-            </div>
-          </div>
-        </div>
-
-        <h3 className="mb-2 text-sm font-semibold uppercase tracking-wide text-neutral-500">
-          데이터 수집 안내
-        </h3>
-        <ul className="mb-6 list-disc space-y-1 pl-5 text-neutral-700">
-          {dataTips.map((tip, index) => (
-            <li key={index}>{tip}</li>
-          ))}
-        </ul>
-
-        <div className="mb-6 flex flex-wrap gap-3">
-          <ResourceButton linkKey="teachableMachine" />
-          <ResourceButton linkKey="sampleModel" />
-        </div>
-
-        <div className="mb-6 rounded-lg border border-neutral-200 bg-white p-4">
-          <h3 className="mb-2 text-sm font-semibold text-neutral-800">
-            테스트 미션
-          </h3>
-          <ul className="mb-3 space-y-1 text-sm text-neutral-700">
-            {testMissions.map((mission, index) => (
-              <li key={index} className="flex items-start gap-2">
-                <span aria-hidden="true" className="mt-0.5 text-neutral-400">□</span>
-                <span>{mission}</span>
-              </li>
-            ))}
-          </ul>
-          <p className="mb-2 text-sm font-medium text-neutral-800">
-            생각할 질문: 모델은 정말 손 모양을 보고 있을까요? 혹시 배경이나 손의 위치를
-            더 많이 보고 있지는 않을까요?
-          </p>
-          <label htmlFor="tm-error-note" className="mb-1 block text-xs font-medium text-neutral-600">
-            오류 원인 기록란
-          </label>
-          <textarea
-            id="tm-error-note"
-            value={errorNote}
-            onChange={(event) => setErrorNote(event.target.value)}
-            rows={2}
-            className="w-full rounded-md border border-neutral-300 p-2 text-sm focus-visible:ring-2 focus-visible:ring-brand-500"
-            placeholder="관찰한 내용을 자유롭게 적어보세요."
-          />
-        </div>
-
-        <details className="mb-6 rounded-lg border border-neutral-200 bg-white p-4">
-          <summary className="cursor-pointer text-sm font-semibold text-neutral-700">
-            선택 확장: 이미지 파일 업로드
-          </summary>
-          <p className="mt-2 text-sm text-neutral-600">
-            웹캠으로 직접 촬영하는 것 외에 이미지 파일을 업로드하여 학습할 수도
-            있습니다. 암석, 식물, 미술 작품, 악기처럼 현장에서 바로 준비하기
-            어려운 대상을 수업에 활용할 수 있습니다.
-          </p>
-        </details>
-
-        <TroubleshootingPanel categories={['teachableMachine', 'webcam']} />
+    <section aria-label="분류 모델 만들기" className="px-4 py-6">
+      <div className="mb-4 flex flex-wrap items-baseline gap-x-3 gap-y-1">
+        <h2 className="text-2xl font-bold text-neutral-900">
+          3. 분류 모델 만들기
+        </h2>
+        <span className="text-sm text-neutral-500">권장 15분</span>
       </div>
 
-      <aside className="space-y-4">
-        <CompletionPanel items={completionItems} />
-      </aside>
+      <div className="mb-6 rounded-xl border border-brand-200 bg-brand-50 p-5">
+        <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+          <div className="max-w-2xl">
+            <p className="text-xs font-semibold uppercase tracking-wide text-brand-700">
+              이번 단계가 끝나면
+            </p>
+            <h3 className="mt-1 text-lg font-bold text-neutral-900">
+              {modelBuildingWorkflow.outcome}
+            </h3>
+            <p className="mt-2 text-sm leading-relaxed text-neutral-600">
+              {modelBuildingWorkflow.intro}
+            </p>
+          </div>
+          <div className="flex shrink-0 flex-wrap gap-2">
+            <ResourceButton linkKey="teachableMachine" />
+            <ResourceButton linkKey="sampleModel" variant="secondary" />
+          </div>
+        </div>
+        <p className="mt-3 text-xs text-neutral-500">
+          직접 만든 모델이 잘 작동하지 않을 때만 예시 모델을 안전망으로
+          사용하세요.
+        </p>
+      </div>
+
+      <ol className="space-y-4">
+        {modelBuildingWorkflow.steps.map((step, index) => (
+          <li
+            key={step.title}
+            className="rounded-xl border border-neutral-200 bg-white p-5 shadow-sm"
+          >
+            <article className="grid gap-5 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] lg:items-start">
+              <div>
+                <div className="flex items-center gap-3">
+                  <span
+                    aria-hidden="true"
+                    className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-brand-600 text-sm font-bold text-white"
+                  >
+                    {index + 1}
+                  </span>
+                  <h3 className="text-lg font-bold text-neutral-900">
+                    {step.title}
+                  </h3>
+                </div>
+                <p className="mt-3 text-sm leading-relaxed text-neutral-600">
+                  {step.description}
+                </p>
+                {step.points && (
+                  <ul className="mt-3 space-y-2 text-sm leading-relaxed text-neutral-700">
+                    {step.points.map((point) => (
+                      <li key={point} className="flex gap-2">
+                        <span aria-hidden="true" className="text-brand-500">
+                          •
+                        </span>
+                        <span>{point}</span>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </div>
+
+              <div
+                className={
+                  step.screenshots.length > 1
+                    ? 'grid gap-3 sm:grid-cols-2'
+                    : 'grid gap-3'
+                }
+              >
+                {step.screenshots.map((screenshot) => (
+                  <ScreenshotFigure key={screenshot} id={screenshot} />
+                ))}
+              </div>
+            </article>
+          </li>
+        ))}
+      </ol>
+
+      <div className="mt-6 rounded-xl border border-brand-200 bg-brand-50 p-5">
+        <strong className="text-neutral-900">다음 단계에 가져갈 것</strong>
+        <p className="mt-1 text-sm leading-relaxed text-neutral-700">
+          방금 복사한 모델 URL입니다. 4단계에서 이 주소를 행동 연결 사이트에
+          붙여 넣습니다.
+        </p>
+      </div>
+
+      <TroubleshootingPanel
+        categories={['teachableMachine', 'webcam', 'modelExport']}
+      />
     </section>
   )
 }

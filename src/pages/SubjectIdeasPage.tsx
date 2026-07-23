@@ -1,6 +1,7 @@
 import { useMemo, useState } from 'react'
 import { SubjectCard } from '../components/SubjectCard'
 import { ResourceButton } from '../components/ResourceButton'
+import { actionExtensions } from '../data/practiceWorkflows'
 import { modelTypeFilters, subjectExamples, type ModelType } from '../data/subjectExamples'
 
 export function SubjectIdeasPage() {
@@ -25,6 +26,22 @@ export function SubjectIdeasPage() {
         모델을 만드는 것보다 중요한 것은 그 모델의 판단을 내 수업의 어떤 활동과
         연결할 것인가입니다.
       </p>
+
+      <div className="mb-6 rounded-lg border border-neutral-200 bg-white p-4">
+        <p className="text-sm font-semibold text-neutral-800">
+          판단 뒤 행동은 더 넓게 확장할 수 있습니다
+        </p>
+        <div className="mt-3 flex flex-wrap gap-2">
+          {actionExtensions.map((item) => (
+            <span
+              key={item}
+              className="rounded-full bg-neutral-100 px-3 py-1 text-xs font-medium text-neutral-700"
+            >
+              {item}
+            </span>
+          ))}
+        </div>
+      </div>
 
       <div
         role="group"

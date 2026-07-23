@@ -2,6 +2,7 @@ import { externalLinks, type ExternalLinkKey } from '../data/links'
 
 type Props = {
   linkKey: ExternalLinkKey
+  variant?: 'primary' | 'secondary'
 }
 
 /**
@@ -9,7 +10,7 @@ type Props = {
  * 미확정(pending) 링크는 비활성 상태로 '준비 중'을 표시한다.
  * 색상만으로 상태를 구분하지 않고 텍스트 배지를 함께 제공한다.
  */
-export function ResourceButton({ linkKey }: Props) {
+export function ResourceButton({ linkKey, variant = 'primary' }: Props) {
   const link = externalLinks[linkKey]
 
   if (link.status === 'pending') {
@@ -31,7 +32,11 @@ export function ResourceButton({ linkKey }: Props) {
       href={link.url}
       target="_blank"
       rel="noopener noreferrer"
-      className="inline-flex items-center gap-2 rounded-lg bg-brand-600 px-4 py-2 text-sm font-semibold text-white transition hover:bg-brand-700"
+      className={
+        variant === 'primary'
+          ? 'inline-flex items-center gap-2 rounded-lg bg-brand-600 px-4 py-2 text-sm font-semibold text-white transition hover:bg-brand-700'
+          : 'inline-flex items-center gap-2 rounded-lg border border-neutral-300 bg-white px-4 py-2 text-sm font-semibold text-neutral-700 transition hover:bg-neutral-100'
+      }
     >
       {link.label}
       <span aria-hidden="true">↗</span>
