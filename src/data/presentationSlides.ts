@@ -1,5 +1,11 @@
 import { eventInfo } from './event'
 import { lessonNarrative } from './lessonNarrative'
+import {
+  closingQuestion,
+  closingTakeaway,
+  designFactors,
+  practiceMeaning,
+} from './closing'
 import type { LessonImageId } from './lessonImages'
 import type { ClassPhotoId } from './classPhotos'
 import type { StepId } from './steps'
@@ -193,21 +199,32 @@ const slidesByStep: Record<StepId, Slide[]> = {
   8: [
     {
       eyebrow: '8단계 · 공유와 마무리',
-      lines: ['내 수업의 작은 질문', '하나부터 시작합니다'],
+      lines: [closingQuestion],
+      note: '하버드의 맞춤형 AI 튜터와 MIT의 범용 LLM 글쓰기 연구',
     },
     {
-      eyebrow: '실천 계획',
-      lines: ['오늘 가져갈 한 가지'],
+      eyebrow: 'AI에게 맡긴 역할',
+      lines: ['학습 도우미인가,', '작성을 대신하는 도구인가'],
       bullets: [
-        '나는 ____ 수업에서',
-        '____ 모델 또는 Gem을 활용하여',
-        '학생들이 ____ 하도록 하겠습니다',
+        '맞춤형 AI 튜터 → 질문 · 순차적 안내 · 적시 피드백',
+        '범용 LLM 글쓰기 → 결과물 작성 과정 지원',
       ],
-      note: 'Padlet에 함께 나눕니다',
+      note: '두 연구는 과제·대상·설계가 달라 직접 비교할 수 없습니다',
     },
     {
-      eyebrow: '마무리',
-      lines: ['도구를 완벽히 익히는 것보다', '판단과 행동을 수업에', '어떻게 연결할지가 중요합니다'],
+      eyebrow: '결과를 가르는 설계',
+      lines: ['AI의 효과를 결정하는 핵심은', '교사의 교수 설계입니다'],
+      bullets: designFactors,
+    },
+    {
+      eyebrow: '오늘 실습의 의미',
+      lines: ['챗봇이 아니라', 'AI의 역할을 설계했습니다'],
+      bullets: practiceMeaning,
+    },
+    {
+      eyebrow: '최종 메시지',
+      lines: [closingTakeaway.lead, closingTakeaway.emphasis],
+      note: closingTakeaway.teacher,
     },
   ],
 }

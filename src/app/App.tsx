@@ -134,13 +134,7 @@ export default function App() {
       case 7:
         return <GroundedGemPage />
       case 8:
-        return (
-          <SharePage
-            onJumpToStep={goToStep}
-            onOpenHelp={() => setHelpOpen(true)}
-            onRestart={restart}
-          />
-        )
+        return <SharePage onRestart={restart} />
       default:
         return null
     }

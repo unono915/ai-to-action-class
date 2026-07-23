@@ -76,8 +76,8 @@ export const steps: Step[] = [
     id: 8,
     title: '공유와 마무리',
     shortTitle: '공유·마무리',
-    summary: '오늘 수업에 가져갈 한 가지를 정리하고 공유합니다.',
-    presentationHeadline: '내 수업의 작은 질문 하나부터 시작합니다.',
+    summary: '두 연구와 오늘의 실습을 연결해 AI 시대 교사의 설계 역할을 정리합니다.',
+    presentationHeadline: '학생이 더 깊이 생각하도록 돕는 AI를 설계합니다.',
     durationMinutes: 7,
   },
 ]

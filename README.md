@@ -89,6 +89,7 @@ npm run preview  # 빌드 결과 로컬 미리보기
 | 교과별 사례 카드 | [`src/data/subjectExamples.ts`](src/data/subjectExamples.ts) |
 | Gem 메타 프롬프트 조합·입력 예시 | [`src/data/prompts.ts`](src/data/prompts.ts) |
 | Gem 메타 프롬프트 본문 | [`src/data/gemMetaPromptTemplate.md`](src/data/gemMetaPromptTemplate.md) |
+| 8단계 연구 요약·마무리 메시지 | [`src/data/closing.ts`](src/data/closing.ts) |
 | 도움말·오류 해결 Q&A | [`src/data/troubleshooting.ts`](src/data/troubleshooting.ts) |
 | 화면 캡처 설명·alt | [`src/data/screenshots.ts`](src/data/screenshots.ts) |
 
@@ -117,7 +118,7 @@ npm run preview  # 빌드 결과 로컬 미리보기
 - **비어 있는 URL을 임의로 채우지 않습니다.** URL이 확정되면 이 파일만 수정하면 됩니다.
 
 현재 확정 링크: Teachable Machine, 행동 연결 사이트, 교과별 아이디어 코치 Gem,
-Gemini, Padlet, 예시 모델.
+Gemini, Padlet, 예시 모델, 하버드 AI 튜터 연구, MIT LLM 글쓰기 연구.
 
 ## 이미지 교체
 

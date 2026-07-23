@@ -55,6 +55,20 @@ export const externalLinks = {
     status: 'active',
     description: '다운로드하거나 복사한 메타 프롬프트를 입력하는 생성형 AI',
   },
+  harvardAiTutorStudy: {
+    key: 'harvardAiTutorStudy',
+    label: '하버드 AI 튜터 연구 보기',
+    url: 'https://www.nature.com/articles/s41598-025-97652-6',
+    status: 'active',
+    description: '맞춤형 AI 튜터의 학습 효과를 살핀 대학 물리학 수업 무작위 대조 연구',
+  },
+  mitBrainOnChatGptStudy: {
+    key: 'mitBrainOnChatGptStudy',
+    label: 'MIT LLM 글쓰기 연구 보기',
+    url: 'https://arxiv.org/abs/2506.08872',
+    status: 'active',
+    description: 'LLM을 활용한 에세이 작성의 인지적 참여와 소유감을 살핀 프리프린트',
+  },
   // 미확정: 전체 자료 다운로드 구성이 확정되기 전에는 비활성으로 둔다.
   downloads: {
     key: 'downloads',
