@@ -3,19 +3,8 @@ import { SubjectCard } from '../components/SubjectCard'
 import { ResourceButton } from '../components/ResourceButton'
 import { modelTypeFilters, subjectExamples, type ModelType } from '../data/subjectExamples'
 
-type IdeaDraft = {
-  topic: string
-  modelType: string
-  labels: string
-  action: string
-}
-
-const emptyDraft: IdeaDraft = { topic: '', modelType: '', labels: '', action: '' }
-
 export function SubjectIdeasPage() {
   const [filter, setFilter] = useState<'all' | ModelType>('all')
-  const [draft, setDraft] = useState<IdeaDraft>(emptyDraft)
-  const [saved, setSaved] = useState<IdeaDraft | null>(null)
 
   const filteredExamples = useMemo(
     () =>
@@ -72,76 +61,14 @@ export function SubjectIdeasPage() {
         <h3 className="mb-2 text-base font-bold text-neutral-900">
           아이디어 코치 Gem과 대화하기
         </h3>
-        <p className="mb-3 text-sm text-neutral-600">
-          Gem은 다음 순서로 질문합니다: 교과·학년 → 개념 → 관찰 대상 → 모델 유형 →
-          레이블 → 데이터 수집 → 판단 뒤 행동 → 수업 흐름 → 한계 점검
+        <p className="mb-4 text-sm text-neutral-600">
+          Gem과 간단한 질문을 주고받으며 내 교과에 맞는 수업 아이디어를
+          얻어가세요! 나온 아이디어는 Padlet에 공유해 함께 나눕니다.
         </p>
-        <div className="mb-4">
+        <div className="flex flex-wrap gap-3">
           <ResourceButton linkKey="subjectIdeaGem" />
-        </div>
-
-        <p className="mb-3 text-sm text-neutral-600">
-          Gem과 나눈 대화 결과를 아래에 정리한 뒤 Padlet에 공유하세요.
-        </p>
-
-        <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
-          <label className="block text-sm">
-            <span className="mb-1 block font-medium text-neutral-700">수업 주제</span>
-            <input
-              type="text"
-              value={draft.topic}
-              onChange={(event) => setDraft({ ...draft, topic: event.target.value })}
-              className="w-full rounded-md border border-neutral-300 p-2 focus-visible:ring-2 focus-visible:ring-brand-500"
-            />
-          </label>
-          <label className="block text-sm">
-            <span className="mb-1 block font-medium text-neutral-700">모델 유형</span>
-            <input
-              type="text"
-              value={draft.modelType}
-              onChange={(event) => setDraft({ ...draft, modelType: event.target.value })}
-              className="w-full rounded-md border border-neutral-300 p-2 focus-visible:ring-2 focus-visible:ring-brand-500"
-            />
-          </label>
-          <label className="block text-sm sm:col-span-2">
-            <span className="mb-1 block font-medium text-neutral-700">레이블</span>
-            <input
-              type="text"
-              value={draft.labels}
-              onChange={(event) => setDraft({ ...draft, labels: event.target.value })}
-              className="w-full rounded-md border border-neutral-300 p-2 focus-visible:ring-2 focus-visible:ring-brand-500"
-            />
-          </label>
-          <label className="block text-sm sm:col-span-2">
-            <span className="mb-1 block font-medium text-neutral-700">판단 뒤 행동</span>
-            <input
-              type="text"
-              value={draft.action}
-              onChange={(event) => setDraft({ ...draft, action: event.target.value })}
-              className="w-full rounded-md border border-neutral-300 p-2 focus-visible:ring-2 focus-visible:ring-brand-500"
-            />
-          </label>
-        </div>
-
-        <div className="mt-4 flex flex-wrap items-center gap-3">
-          <button
-            type="button"
-            onClick={() => setSaved(draft)}
-            className="rounded-lg border border-neutral-300 bg-white px-4 py-2 text-sm font-semibold text-neutral-700 hover:bg-neutral-100"
-          >
-            저장
-          </button>
           <ResourceButton linkKey="padlet" />
-          {saved && (
-            <span className="text-xs text-green-700" role="status">
-              이 화면에 임시로 저장되었습니다.
-            </span>
-          )}
         </div>
-
-        <p className="mt-3 text-xs text-neutral-500">
-          이 입력값은 새로고침하면 사라집니다. 결과를 남기려면 Padlet에 공유하세요.
-        </p>
       </div>
     </section>
   )
