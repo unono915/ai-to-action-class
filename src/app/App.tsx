@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from 'react'
-import { STORAGE_KEYS, type Mode } from './appState'
+import { STORAGE_KEYS } from './appState'
 import { useQueryState } from '../hooks/useQueryState'
 import { usePersistedState } from '../hooks/usePersistedState'
 import { useKeyboardNavigation } from '../hooks/useKeyboardNavigation'
@@ -96,13 +96,6 @@ export default function App() {
     )
   }, [step, setCompletedSteps])
 
-  const startMode = useCallback(
-    (nextMode: Mode) => {
-      setMode(nextMode)
-    },
-    [setMode],
-  )
-
   const restart = useCallback(() => {
     setMode('practice')
     goToStep(1)
@@ -120,7 +113,12 @@ export default function App() {
   const renderPracticeContent = () => {
     switch (step) {
       case 1:
-        return <StartPage onStartMode={startMode} />
+        return (
+          <StartPage
+            onStartPractice={() => goToStep(2)}
+            onOpenPresentation={() => setMode('present')}
+          />
+        )
       case 2:
         return <LessonSharingPage />
       case 3:

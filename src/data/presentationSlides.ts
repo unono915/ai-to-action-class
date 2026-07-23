@@ -9,6 +9,13 @@ import {
 import type { LessonImageId } from './lessonImages'
 import type { ClassPhotoId } from './classPhotos'
 import type { StepId } from './steps'
+import {
+  startHeroMessage,
+  startHeroImage,
+  startHeroImageUrl,
+  startOutcomes,
+  startPreparations,
+} from './startPage'
 
 // 발표 모드 슬라이드 데이터.
 // 발표 모드는 실습 모드와 "다른 기능"을 넣는 곳이 아니라,
@@ -30,6 +37,8 @@ export type Slide = {
   photo?: ClassPhotoId
   /** 교실에서 실제로 오간 말 (따옴표 강조) */
   quote?: { text: string; who: string }
+  /** 수업 교안·현장 사진 외의 발표용 이미지 */
+  asset?: { src: string; alt: string }
 }
 
 // 2단계(수업 나눔)는 발표자의 실제 수업 한 편을 시간순으로 따라간다.
@@ -48,28 +57,21 @@ const slidesByStep: Record<StepId, Slide[]> = {
     {
       eyebrow: eventInfo.eventName,
       lines: ['판단하는 AI, 움직이는 수업'],
-      note: eventInfo.sessionSubtitle,
+      note: startHeroMessage,
+      asset: { src: startHeroImageUrl(), alt: startHeroImage.alt },
     },
     {
-      eyebrow: '오늘 가져갈 것',
-      lines: ['네 가지 결과물을 만들어 갑니다'],
-      bullets: [
-        '손 모양 이미지 분류 모델',
-        '판단 결과를 텍스트·이미지로 잇는 행동 연결 경험',
-        '내 교과 AI 모델 활용 아이디어',
-        'Gem 요청사항과 지식 초안을 만드는 맞춤 메타 프롬프트',
-      ],
+      eyebrow: '오늘의 여정',
+      lines: ['네 가지를 직접 만들고 연결합니다'],
+      bullets: startOutcomes.map(
+        (outcome) => `${outcome.title} — ${outcome.description}`,
+      ),
       note: `${eventInfo.date} · ${eventInfo.location} · ${eventInfo.presenter}`,
     },
     {
       eyebrow: '준비물',
       lines: ['시작 전에 확인하세요'],
-      bullets: [
-        'Chrome 브라우저',
-        '웹캠',
-        'Google 계정 로그인',
-        '학생들이 자주 어려워하는 교과 개념 하나',
-      ],
+      bullets: [...startPreparations],
     },
   ],
   2: philosophySlides,

@@ -23,7 +23,7 @@ export function PresentationDeck({ step, slide }: Props) {
     ? { src: classPhotoUrl(current.photo), alt: classPhotos[current.photo].alt }
     : current.image
       ? { src: lessonImageUrl(current.image), alt: lessonImages[current.image].alt }
-      : null
+      : current.asset ?? null
 
   const hasQuote = Boolean(current.quote)
 
