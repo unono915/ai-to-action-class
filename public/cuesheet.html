@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>발표 큐시트 &amp; 대본 · 판단하는 AI, 움직이는 수업</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8E%A4%3C/text%3E%3C/svg%3E" />
+  <style>
+    :root {
+      --ground:#f7f6fb; --surface:#fff; --surface-2:#f2f0fa;
+      --ink:#1d1a2b; --ink-soft:#56506b; --ink-faint:#8b849e; --line:#e7e3f2;
+      --brand:#4f46e5; --brand-soft:#eef0fe; --brand-ink:#3730a3;
+      --hands:#ea580c; --hands-soft:#fdf0e8; --hands-ink:#9a3412;
+      --ppt:#0f766e; --ppt-soft:#e6f3f1; --ppt-ink:#115e56;
+      --shadow:0 1px 2px rgba(29,26,43,.05),0 8px 24px -16px rgba(29,26,43,.28);
+      --sans:'Pretendard','Pretendard Variable',system-ui,-apple-system,'Apple SD Gothic Neo','Malgun Gothic',sans-serif;
+      --mono:ui-monospace,'SF Mono',Menlo,Consolas,monospace;
+    }
+    @media (prefers-color-scheme:dark){:root{
+      --ground:#16141f; --surface:#201d2b; --surface-2:#272334;
+      --ink:#ece9f5; --ink-soft:#b3adc6; --ink-faint:#837c98; --line:#322d42;
+      --brand:#8b87f5; --brand-soft:#262247; --brand-ink:#c7c3fb;
+      --hands:#fb923c; --hands-soft:#2c2119; --hands-ink:#fdba74;
+      --ppt:#2dd4bf; --ppt-soft:#16302c; --ppt-ink:#7fe6d7;
+      --shadow:0 1px 2px rgba(0,0,0,.3),0 10px 30px -18px rgba(0,0,0,.7);
+    }}
+    *{box-sizing:border-box}
+    body{margin:0;background:var(--ground);color:var(--ink);font-family:var(--sans);line-height:1.62;-webkit-font-smoothing:antialiased}
+    .wrap{max-width:920px;margin:0 auto;padding:36px 20px 80px}
+    a{color:var(--brand)}
+    .eyebrow{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand);margin:0 0 10px}
+    h1{font-size:clamp(24px,4vw,36px);font-weight:800;line-height:1.15;letter-spacing:-.01em;margin:0 0 12px;text-wrap:balance}
+    .lede{font-size:15.5px;color:var(--ink-soft);margin:0 0 18px;max-width:64ch}
+    .lede b{color:var(--ink)}
+    .meta{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:8px}
+    .meta span{display:inline-flex;align-items:center;gap:6px;background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:5px 12px;font-size:12.5px;color:var(--ink-soft);font-weight:600}
+    .meta b{color:var(--ink);font-variant-numeric:tabular-nums}
+    .flow{display:flex;flex-wrap:wrap;align-items:center;gap:7px;margin-top:16px;font-size:13px;font-weight:700}
+    .flow .n{padding:7px 12px;border-radius:9px}
+    .flow .ppt{background:var(--ppt-soft);color:var(--ppt-ink)}
+    .flow .web{background:var(--brand-soft);color:var(--brand-ink)}
+    .flow .ar{color:var(--ink-faint);font-weight:400}
+    .toc{display:flex;gap:10px;margin:22px 0 4px;flex-wrap:wrap}
+    .toc a{display:inline-block;background:var(--surface-2);border-radius:8px;padding:8px 14px;font-size:13px;font-weight:700;text-decoration:none;color:var(--ink)}
+    .seclabel{font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-faint);margin:46px 0 12px;padding-top:8px;border-top:1px solid var(--line)}
+
+    /* 한눈에 보기 표 */
+    .rows{display:flex;flex-direction:column;gap:8px}
+    .row{display:grid;grid-template-columns:92px 1fr;gap:14px;background:var(--surface);border:1px solid var(--line);border-radius:11px;box-shadow:var(--shadow);overflow:hidden}
+    .row>.t{padding:14px 0 14px 15px;border-left:4px solid var(--brand);font-family:var(--mono);font-variant-numeric:tabular-nums}
+    .row.ppt>.t{border-left-color:var(--ppt)} .row.hands>.t{border-left-color:var(--hands)}
+    .row .time{font-size:14px;font-weight:700;letter-spacing:-.02em}
+    .row .dur{font-size:11.5px;color:var(--ink-faint)}
+    .row>.c{padding:12px 16px 12px 0;min-width:0}
+    .row .ttl{font-size:15px;font-weight:800;margin:0 0 3px}
+    .row .tag{font-size:10.5px;font-weight:700;padding:2px 8px;border-radius:999px;margin-left:6px;white-space:nowrap;vertical-align:middle}
+    .tag.web{background:var(--brand-soft);color:var(--brand-ink)} .tag.hands{background:var(--hands-soft);color:var(--hands-ink)} .tag.ppt{background:var(--ppt-soft);color:var(--ppt-ink)}
+    .row .d{font-size:13px;color:var(--ink-soft);margin:0}
+
+    /* 대본 */
+    .scene{background:var(--surface);border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow);padding:18px 20px;margin-bottom:14px}
+    .scene h3{margin:0 0 3px;font-size:17px;font-weight:800;letter-spacing:-.01em}
+    .scene .sub{margin:0 0 12px;font-size:12.5px;color:var(--ink-faint);font-weight:600}
+    .line{display:grid;grid-template-columns:70px 1fr;gap:12px;padding:9px 0;border-top:1px solid var(--line)}
+    .line:first-of-type{border-top:none}
+    .line .cue{font-size:11.5px;font-weight:700;color:var(--brand);padding-top:2px}
+    .line .cue.stop{color:var(--hands-ink)}
+    .line .cue.photo{color:var(--ppt-ink)}
+    .line p{margin:0;font-size:14.5px;color:var(--ink)}
+    .line .stage{color:var(--ink-faint);font-size:13px}
+    .badge{display:inline-block;font-size:10.5px;font-weight:800;letter-spacing:.03em;padding:2px 7px;border-radius:6px;background:var(--ppt-soft);color:var(--ppt-ink);margin-right:6px;vertical-align:middle}
+    .badge.stop{background:var(--hands-soft);color:var(--hands-ink)}
+    .foot{margin-top:36px;padding-top:18px;border-top:1px solid var(--line);font-size:12.5px;color:var(--ink-faint)}
+    .top{position:fixed;right:16px;bottom:16px;background:var(--brand);color:#fff;border-radius:999px;padding:9px 15px;font-size:12.5px;font-weight:700;text-decoration:none;box-shadow:var(--shadow)}
+    @media(max-width:640px){.row{grid-template-columns:1fr}.row>.t{border-left:none;border-top:4px solid var(--brand);display:flex;gap:8px;align-items:baseline;padding:12px 15px}.row.ppt>.t{border-top-color:var(--ppt)}.row.hands>.t{border-top-color:var(--hands)}.row>.c{padding:2px 15px 14px}.line{grid-template-columns:1fr;gap:2px}.line .cue{padding-top:0}}
+  </style>
+</head>
+<body>
+<div class="wrap" id="top">
+  <header>
+    <p class="eyebrow">발표 진행 큐시트 &amp; 대본 · 발표자용</p>
+    <h1>판단하는 AI, 움직이는 수업</h1>
+    <p class="lede">이미지 분류 모델의 판단을 <b>실제 행동으로 잇는</b> 수업 한 편을, 선생님들과 편하게 나누고 직접 만들어 보는 80분. PPT로 문을 열고 → 링크로 <b>실습 페이지</b>에 들어와 사례 나눔·실습을 진행하고 → 다시 PPT로 돌아와 Q&amp;A로 닫습니다.</p>
+    <div class="meta">
+      <span>총 <b>80분</b></span>
+      <span>교원 <b>40명</b> · 각자 노트북</span>
+      <span>발표자 지윤호</span>
+    </div>
+    <div class="flow">
+      <span class="n ppt">PPT 오프닝</span><span class="ar">→</span>
+      <span class="n web">웹 · 사례 나눔 + 실습 (STEP 1–8)</span><span class="ar">→</span>
+      <span class="n ppt">PPT Q&amp;A</span>
+    </div>
+    <div class="toc">
+      <a href="#cue">① 한눈에 보기 (큐시트)</a>
+      <a href="#script">② 발표 대본</a>
+    </div>
+  </header>
+
+  <!-- ===================== 큐시트 ===================== -->
+  <p class="seclabel" id="cue">① 시간대별 한눈에 보기</p>
+  <div class="rows">
+    <div class="row ppt"><div class="t"><div class="time">0:00</div><div class="dur">~0:07 · 7분</div></div><div class="c"><p class="ttl">오프닝 · 접속 안내<span class="tag ppt">PPT 1–5</span></p><p class="d">제목 → 철학 한 줄 → (등록 QR) → 소개 → <b>실습 링크로 전원 접속</b>. 철학은 한 줄만, 깊은 얘기는 웹에서.</p></div></div>
+    <div class="row"><div class="t"><div class="time">0:07</div><div class="dur">~0:10 · 3분</div></div><div class="c"><p class="ttl">시작하기<span class="tag web">STEP 1</span></p><p class="d">“이 화면이 안내서예요.” 오늘 가져갈 4가지 예고 후 발표 모드 전환.</p></div></div>
+    <div class="row"><div class="t"><div class="time">0:10</div><div class="dur">~0:22 · 12분</div></div><div class="c"><p class="ttl">수업 나눔 (18장·현장 사진 6장)<span class="tag web">STEP 2 · 발표의 심장</span></p><p class="d">내 수업 한 편을 시간순으로. 철학은 설명 말고 <b>장면이 말하게</b>. 정지 포인트 4·8·9·11·18장.</p></div></div>
+    <div class="row hands"><div class="t"><div class="time">0:22</div><div class="dur">~0:37 · 15분</div></div><div class="c"><p class="ttl">손동작 분류 모델 만들기<span class="tag hands">STEP 3 · 실습</span></p><p class="d">O·X·배경 모델 학습·테스트. 예시 모델을 안전망으로. 순회 코칭.</p></div></div>
+    <div class="row hands"><div class="t"><div class="time">0:37</div><div class="dur">~0:49 · 12분</div></div><div class="c"><p class="ttl">판단을 행동으로<span class="tag hands">STEP 4 · 실습</span></p><p class="d">발표자 30초 시연 → 각자. 웹캠 앞 손동작이 문구로 출력되는 <b>핵심 장면</b>.</p></div></div>
+    <div class="row"><div class="t"><div class="time">0:49</div><div class="dur">~1:00 · 11분</div></div><div class="c"><p class="ttl">내 교과로 확장 · 아이디어 Gem<span class="tag web">STEP 5</span></p><p class="d">교과 카드 + 아이디어 코치 Gem으로 <b>한 문장 아이디어</b> → Padlet.</p></div></div>
+    <div class="row"><div class="t"><div class="time">1:00</div><div class="dur">~1:07 · 7분</div></div><div class="c"><p class="ttl">나만의 개념 체크 Gem<span class="tag web">STEP 6 · 데모</span></p><p class="d">정답을 되묻는 AI. 프롬프트 빌더 시연. <b>시간 조절 밸브</b>.</p></div></div>
+    <div class="row"><div class="t"><div class="time">1:07</div><div class="dur">~1:09 · 2분</div></div><div class="c"><p class="ttl">자료 기반 Gem<span class="tag web">STEP 7 · 선택·데모</span></p><p class="d">자료 연결 + “무오류 아님” 한 마디. 데모만.</p></div></div>
+    <div class="row"><div class="t"><div class="time">1:09</div><div class="dur">~1:10 · 1분</div></div><div class="c"><p class="ttl">공유와 마무리<span class="tag web">STEP 8</span></p><p class="d">실천 계획 한 문장 → Padlet → PPT로 복귀.</p></div></div>
+    <div class="row ppt"><div class="t"><div class="time">1:10</div><div class="dur">~1:20 · 10분</div></div><div class="c"><p class="ttl">Q&amp;A · 마무리 · 수령<span class="tag ppt">PPT 6–8</span></p><p class="d">Padlet 실천계획으로 Q&amp;A 물꼬. 마지막 메시지 한 방.</p></div></div>
+  </div>
+
+  <!-- ===================== 대본 ===================== -->
+  <p class="seclabel" id="script">② 발표 대본 (읽는 톤: 편하게, 대화하듯)</p>
+
+  <div class="scene">
+    <h3>PPT 오프닝</h3>
+    <p class="sub">PPT 슬라이드 1–5 · 0:00–0:07</p>
+    <div class="line"><div class="cue">PPT 1</div><p>안녕하세요, 경문고등학교에서 정보 가르치는 지윤호입니다. 만나서 반갑습니다. 오늘 이 시간은요, 거창한 이론 강의라기보다… 제가 교실에서 실제로 해 본 수업 한 편을 같이 열어보는 시간이라고 생각해 주시면 좋겠어요. 편하게 들으시고, 중간중간 직접 만들어도 보시고요.</p></div>
+    <div class="line"><div class="cue">PPT 2</div><p>제가 수업을 만들 때 붙들고 있는 생각은 딱 하나예요. ‘어떤 도구를 쓸까’보다 ‘학생한테 어떤 <b>사고 경험</b>을 줄까.’ AI 도구가 아무리 많아져도 결국 중요한 건 그거더라고요. 오늘 그 이야기를 제 수업 사례로 풀어볼게요.</p></div>
+    <div class="line"><div class="cue">PPT 3–4</div><p>아, 콘페스타 등록 QR은 안내대로 미리 찍어주시고요. 저는 간단히 — 정보 교사고, AI·에듀테크 쪽으로 이런저런 활동을 하고 있습니다. 자세한 건 넘어갈게요(웃음).</p></div>
+    <div class="line"><div class="cue">PPT 5</div><p>자, 여기가 중요해요. 화면의 이 주소로 다 같이 들어와 주세요. QR 찍으셔도 되고요. 크롬에서 열고, 구글 로그인 됐는지, 웹캠 허용되는지 이 세 개만 확인! … 다 들어오셨나요? 좋습니다. 이제 이 화면이 앞으로 80분 동안 여러분의 안내서예요. 저를 따라오시면 됩니다.</p></div>
+  </div>
+
+  <div class="scene">
+    <h3>STEP 1 · 시작하기</h3>
+    <p class="sub">웹 · 발표 모드 · 0:07–0:10</p>
+    <div class="line"><div class="cue">멘트</div><p>이 화면이 오늘의 지도예요. 오늘 끝날 때 여러분 손에 네 가지가 들려 있을 거예요 — 직접 만든 AI 모델, 그게 실제로 말하고 그림 띄우는 경험, 내 교과에 쓸 아이디어, 학생 개념 점검용 나만의 AI 하나. 자, 그럼 제 수업 이야기부터 시작할게요. 화면을 발표 모드로 바꿉니다.</p></div>
+  </div>
+
+  <div class="scene">
+    <h3>STEP 2 · 수업 나눔 <span class="badge">발표의 심장</span></h3>
+    <p class="sub">웹 · 발표 모드 · 18장 · 0:10–0:22 &nbsp;|&nbsp; ★ = 실제 현장 사진, ⏸ = 잠깐 멈추는 곳</p>
+    <div class="line"><div class="cue photo">1 ★사진</div><p>이게 그날 교실이에요. 고1 정보 시간, 연구수업이었습니다. 오늘은 이 수업을 처음부터 끝까지 그대로 열어볼게요.</p></div>
+    <div class="line"><div class="cue photo">2 ★사진</div><p>보시다시피 뒤에 선생님들이 쭉 참관하신 공개수업이었어요. 스물일곱 명하고, 웹캠 달린 컴퓨터실에서 시작했습니다.</p></div>
+    <div class="line"><div class="cue">3 교안</div><p>지난 시간에 학생들이 손 모양 분류 모델을 만들었어요. 사진을 넣으면 ‘하트냐, 너냐, 기타냐’ 판단해주는 데까지. 그런데… 많은 수업이 딱 여기서 끝나요. ‘아, AI가 손을 구분하는구나’ 하고요.</p></div>
+    <div class="line"><div class="cue stop">4 ⏸</div><p>그래서 제가 이 질문을 화면에 크게 걸어놨습니다. <b>“판단만 하고 실행하지 않으면, 달라지는 게 있을까요?”</b> <span class="stage">(선생님들 쪽 보며) 어떻게 생각하세요? … 이 질문, 오늘 저랑 계속 따라다닐 거예요.</span></p></div>
+    <div class="line"><div class="cue">5 교안</div><p>그래서 첫 활동을 개념 설명이 아니라 문제로 열었어요. “여러분, 오늘부터 말을 못 합니다. 손으로만 대화해야 하는데 상대는 수화를 몰라요. 컴퓨터가 내 손동작을 알아듣고 말로 옮겨주면 어떨까?” 이렇게요.</p></div>
+    <div class="line"><div class="cue photo">6 ★사진</div><p>그랬더니 아이들이 이렇게 웹캠 앞에서 엄지척, 브이, 손바닥… 손동작을 지어가며 데이터를 모으더라고요. 코딩 한 줄 없이, 클릭이랑 촬영만으로 각자 자기 모델을 만들었어요.</p></div>
+    <div class="line"><div class="cue">7 교안</div><p>학습이 끝나면 레이블마다 하고 싶은 말을 붙여요. 하트엔 ‘고마워!’, 엄지척엔 ‘잘했어!’, 손바닥엔 ‘잠깐 멈춰!’. 여기서 포인트 — 모델을 <b>학습</b>시키는 일이랑, <b>행동</b>을 정하는 일은 사실 별개 단계예요.</p></div>
+    <div class="line"><div class="cue stop">8 ⏸ 인용</div><p>그리고 이 판단에 ‘몸통’을 답니다. 카메라 → 모델 → 라벨 → 프로그램. 손동작이 인식되면 정해둔 말이 화면에 뜨는 구조를 학생이 직접 완성했어요. 그때 한 학생이 이렇게 말했어요 — <b>(그대로 읽기) “아, 모델은 판단만 하고, 그 결과로 행동하게 만들 수 있는 거네요?”</b> … 저는 이 말이 그날 수업의 성적표라고 생각해요.</p></div>
+    <div class="line"><div class="cue stop">9 ★⏸</div><p>그래서 한 학생 걸 전자칠판에 크게 띄웠어요. 손을 바꾸니까 진짜로 ‘집에 가고 싶다’ 같은 문구가 딱 뜨는 거예요. <span class="stage">교실이 술렁였죠(웃음).</span> 판단이 행동이 되는 순간을, 스물일곱 명이 다 같이 본 거예요.</p></div>
+    <div class="line"><div class="cue">10 인용</div><p>그랬더니 한 학생이 이래요 — <b>“모델을 로봇에 넣으면, 우리 일을 대신해줄 수 있겠네요?”</b> 도구 체험에서 멈추지 않고, ‘AI로 뭘 해결할까’를 스스로 상상하기 시작한 거죠.</p></div>
+    <div class="line"><div class="cue stop">11 ★⏸</div><p>물론 마냥 순조롭진 않았어요(웃음). 예상대로 장난 손동작이 막 나왔죠. 근데 그때 질문을 살짝 바꿨어요. “이 손으로 친구한테 어떤 <b>좋은 말</b>을 전할 수 있을까?” 그랬더니 하트, 괜찮아, 응원해… 이렇게 돌아오더라고요. 그날 수업을 살린 건 완벽한 도구가 아니라 질문 하나였어요.</p></div>
+    <div class="line"><div class="cue">12 교안</div><p>활동을 하고 나서 ‘그럼 이미지 분류는 어떤 문제에 맞을까’ 기준을 같이 세웠어요. 네 개의 관문 — 카메라로 볼 수 있는가, 라벨로 나눌 수 있는가, 데이터를 모을 수 있는가, 판단 뒤 행동할 수 있는가.</p></div>
+    <div class="line"><div class="cue">13 교안</div><p>선도 같이 그었어요. 표정은 카메라로 보이죠. 근데 진심이나 성실함은 안 보이잖아요. 사람을 외모로 판단하는 데는 쓰지 않기로 했습니다. AI가 <b>판단할 수 있다</b>는 거랑 <b>판단해도 된다</b>는 건 다른 문제니까요.</p></div>
+    <div class="line"><div class="cue">14 인용</div><p>재밌는 건, 기준이 생기니까 애들이 달라져요. AI가 아이디어를 추천해주면 그냥 받는 게 아니라 — <b>“이건 카메라로 보이나? 틀렸을 때 위험하지 않나?”</b> 따지기 시작해요. 소비자가 아니라 검토자가 된 거죠.</p></div>
+    <div class="line"><div class="cue">15 교안</div><p>마지막 활동에서는 자기 관심사로 갔어요. 스포츠, 환경, 요리… ‘내 분야에서 이미지 분류로 뭘 해결할까.’ ‘왜 배워요?’ 하던 애들이 스스로 문제를 찾더라고요.</p></div>
+    <div class="line"><div class="cue photo">16 ★사진</div><p>그걸 다 Padlet에 모았어요. 급식 눈치게임 도우미, 스마트 푸시업 자세 교정기, 하늘 상태 알려주는 것까지… 서로 댓글 달고 좋아요 누르면서 시선을 넓혔습니다.</p></div>
+    <div class="line"><div class="cue">17 교안</div><p>수업은 이 말로 닫았어요. 가장 중요한 판단을 내리는 건 AI가 아니라 ‘나’다. AI는 도구고, 어디에 쓸지 정하고 책임지는 건 우리라고요.</p></div>
+    <div class="line"><div class="cue stop">18 ⏸ 다리</div><p>자, 여기까지가 제 수업이었어요. 거창한 프로젝트 아니죠? 이 흐름을 이제 선생님들 교과로 같이 옮겨볼 거예요. 방금 그 네 개의 관문, 실습 내내 또 만나실 거고요. 화면을 실습 모드로 바꿉니다.</p></div>
+  </div>
+
+  <div class="scene">
+    <h3>STEP 3 · 손동작 분류 모델 만들기 <span class="badge">실습</span></h3>
+    <p class="sub">웹 · 실습 모드 → 참가자 각자 · 0:22–0:37</p>
+    <div class="line"><div class="cue">안내</div><p>자, 백문이 불여일견. 방금 그 손동작 모델, 직접 만들어봅시다. 여러분 화면에도 단계가 그대로 떠 있어요. 레이블 세 개만 — O, X, 배경. 웹캠 켜고 각 손모양 30장씩만 찍어주세요. 위치랑 각도 살짝살짝 바꿔가면서요.</p></div>
+    <div class="line"><div class="cue">순회</div><p>훈련 끝나면 꼭 한번 의심해보세요. 이 모델, 진짜 손을 보는 걸까요, 배경을 외운 걸까요? 배경 바꿔서 테스트하면 재밌어요. 안 되시는 분은 화면 ‘예시 모델’ 버튼 쓰시면 다음 단계 다 됩니다.</p></div>
+  </div>
+
+  <div class="scene">
+    <h3>STEP 4 · 판단을 행동으로 <span class="badge">실습</span></h3>
+    <p class="sub">웹 · 행동 연결 사이트(새 탭) · 0:37–0:49</p>
+    <div class="line"><div class="cue">시연</div><p>모델이 판단은 하는데 아직 조용하죠. 이제 몸통을 달 차례예요. 제가 먼저 예시로 보여드릴게요. 모델 내보내기 → 주소 복사 → 행동 연결 사이트에 붙여넣기. 레이블마다 하고 싶은 말 정하고…</p></div>
+    <div class="line"><div class="cue stop">핵심</div><p>자, 웹캠 앞에서 손을 바꿔보세요. 보이시죠? 방금 여러분의 판단이 행동이 됐어요. 이게 아까 제 수업에서 애들이 술렁였던 그 장면이에요. 이제 각자 해보세요.</p></div>
+  </div>
+
+  <div class="scene">
+    <h3>STEP 5 · 내 교과로 확장 · 아이디어 코치 Gem</h3>
+    <p class="sub">웹 · 발표+실습 · 0:49–1:00</p>
+    <div class="line"><div class="cue">멘트</div><p>여기까지가 ‘기술’이었다면, 지금부터가 진짜예요. 이걸 내 교과 어디에 붙일까. 화면에 교과 카드 있어요 — 체육은 자세, 국어는 발음, 과학은 잎 상태… 필터 눌러보면서 내 과목이랑 가까운 거 찾아보세요.</p></div>
+    <div class="line"><div class="cue">안내</div><p>그리고 ‘아이디어 코치 Gem’ 새 탭에서 열어서 교과랑 개념만 넣어보세요. 아까 그 네 관문에 맞춰 같이 다듬어줍니다. 나온 아이디어는 Padlet에 한 줄 올려주세요. 마흔 분의 아이디어가 오늘 제일 큰 선물이에요.</p></div>
+  </div>
+
+  <div class="scene">
+    <h3>STEP 6 · 나만의 개념 체크 Gem <span class="badge">데모</span></h3>
+    <p class="sub">웹 · 프롬프트 빌더 · 1:00–1:07 · 시간 조절 밸브</p>
+    <div class="line"><div class="cue">멘트</div><p>AI 활용이 이미지 분류만 있는 건 아니죠. 이번엔 살짝 틀어서, 학생 개념 이해를 ‘되묻는’ AI를 만들어볼게요. 포인트는 하나 — 정답을 바로 안 알려주는 것.</p></div>
+    <div class="line"><div class="cue">시연</div><p>화면 프롬프트 빌더에 교과·개념·오개념 넣으면 지침이 자동으로 만들어져요. 복사해서 Gemini Gem에 붙이면 끝. 시간 되시는 분은 각자, 빠듯하면 이건 나중에 천천히 하셔도 돼요.</p></div>
+  </div>
+
+  <div class="scene">
+    <h3>STEP 7 · 자료 기반 Gem <span class="badge">선택 · 데모</span></h3>
+    <p class="sub">웹 · 1:07–1:09</p>
+    <div class="line"><div class="cue">멘트</div><p>한 걸음 더 들어가고 싶은 분들 보너스예요. 수업 자료나 노트북을 Gem에 ‘지식’으로 연결하면 그 자료에 근거해서 답하게 할 수 있어요. 다만 솔직히 — 자료 붙인다고 무오류가 되진 않아요. 오류를 줄이는 거지 없애는 게 아니라는 거, 학생들한테도 꼭 같이 짚어주세요.</p></div>
+  </div>
+
+  <div class="scene">
+    <h3>STEP 8 · 공유와 마무리</h3>
+    <p class="sub">웹 · 1:09–1:10</p>
+    <div class="line"><div class="cue">멘트</div><p>자, 마지막으로 딱 한 문장만 남겨요. “나는 ○○ 수업에서, ○○를 활용해, 학생들이 ○○하게 해보겠다.” Padlet에 올려주세요. 그리고 다시 제 슬라이드로 돌아갈게요.</p></div>
+  </div>
+
+  <div class="scene">
+    <h3>PPT 마무리 · Q&amp;A</h3>
+    <p class="sub">PPT 슬라이드 6–8 · 1:10–1:20</p>
+    <div class="line"><div class="cue">Q&amp;A</div><p>다시 왔습니다. 오늘 만드신 것들, 궁금한 거 편하게 물어봐 주세요. <span class="stage">(Padlet 실천계획 2~3개 읽으며)</span> 오, 이거 진짜 좋네요… 이런 식으로 각자 교실에 하나씩 가져가시면 오늘은 대성공이에요.</p></div>
+    <div class="line"><div class="cue stop">마무리</div><p>오늘 중요한 건 도구를 완벽히 익힌 게 아니에요. 판단에서 멈추지 않고 ‘그래서 뭘 할까’까지, 학생이랑 같이 가보는 거. 그 작은 질문 하나면 충분합니다. 가장 중요한 판단을 내리는 뇌는, 오늘도 여러분입니다. 감사합니다!</p></div>
+  </div>
+
+  <p class="foot">
+    발표자용 비공개 참고 자료입니다(검색 비노출). 시간·대사는 <b>기준값</b>이며 현장 반응에 따라 유연하게. 원칙 하나: <b>판단에서 멈추지 말고 ‘그래서 무엇을 할까’까지.</b>
+  </p>
+  <a href="#top" class="top">↑ 맨 위로</a>
+</div>
+</body>
+</html>
