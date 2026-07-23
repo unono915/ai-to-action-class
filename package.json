@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.1.0",
   "type": "module",
-  "description": "「판단하는 AI, 움직이는 수업」 80분 교사 연수 운영 웹사이트",
+  "description": "「판단하는 AI, 움직이는 수업」 90분 교사 연수 운영 웹사이트",
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",

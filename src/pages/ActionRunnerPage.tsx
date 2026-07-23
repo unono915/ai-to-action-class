@@ -2,6 +2,7 @@ import { ResourceButton } from '../components/ResourceButton'
 import { ScreenshotFigure } from '../components/ScreenshotFigure'
 import { TroubleshootingPanel } from '../components/TroubleshootingPanel'
 import { actionRunnerWorkflow } from '../data/practiceWorkflows'
+import { getStep } from '../data/steps'
 
 export function ActionRunnerPage() {
   return (
@@ -10,7 +11,9 @@ export function ActionRunnerPage() {
         <h2 className="text-2xl font-bold text-neutral-900">
           4. 판단을 행동으로
         </h2>
-        <span className="text-sm text-neutral-500">권장 12분</span>
+        <span className="text-sm text-neutral-500">
+          권장 {getStep(4).durationMinutes}분
+        </span>
       </div>
 
       <div className="mb-6 rounded-xl border border-brand-200 bg-brand-50 p-5">

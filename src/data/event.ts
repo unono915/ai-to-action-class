@@ -7,6 +7,6 @@ export const eventInfo = {
   presenter: '경문고등학교 지윤호',
   date: '2026년 7월 24일',
   location: '마곡 코엑스',
-  durationMinutes: 80,
+  durationMinutes: 90,
   participants: 40,
 } as const

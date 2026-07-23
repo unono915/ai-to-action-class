@@ -3,6 +3,7 @@ import { SubjectCard } from '../components/SubjectCard'
 import { ResourceButton } from '../components/ResourceButton'
 import { actionExtensions } from '../data/practiceWorkflows'
 import { modelTypeFilters, subjectExamples, type ModelType } from '../data/subjectExamples'
+import { getStep } from '../data/steps'
 
 export function SubjectIdeasPage() {
   const [filter, setFilter] = useState<'all' | ModelType>('all')
@@ -19,7 +20,9 @@ export function SubjectIdeasPage() {
     <section aria-label="내 교과로 확장하기" className="px-4 py-6">
       <div className="mb-4 flex flex-wrap items-baseline gap-x-3 gap-y-1">
         <h2 className="text-2xl font-bold text-neutral-900">5. 내 교과로 확장하기</h2>
-        <span className="text-sm text-neutral-500">권장 12분</span>
+        <span className="text-sm text-neutral-500">
+          권장 {getStep(5).durationMinutes}분
+        </span>
       </div>
 
       <p className="mb-6 text-lg font-medium text-neutral-800">

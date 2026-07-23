@@ -12,6 +12,7 @@ import {
 import { CopyButton } from '../components/CopyButton'
 import { ResourceButton } from '../components/ResourceButton'
 import { ScreenshotFigure } from '../components/ScreenshotFigure'
+import { getStep } from '../data/steps'
 
 type FieldConfig = {
   key: keyof PromptFields
@@ -138,7 +139,9 @@ export function GemBuilderPage() {
     <section aria-label="나만의 Gem 만들기" className="px-4 py-6">
       <div className="mb-4 flex flex-wrap items-baseline gap-x-3 gap-y-1">
         <h2 className="text-2xl font-bold text-neutral-900">6. 나만의 Gem 만들기</h2>
-        <span className="text-sm text-neutral-500">권장 15분</span>
+        <span className="text-sm text-neutral-500">
+          권장 {getStep(6).durationMinutes}분
+        </span>
       </div>
 
       <div className="mb-6 flex flex-col gap-4 lg:flex-row lg:items-start">

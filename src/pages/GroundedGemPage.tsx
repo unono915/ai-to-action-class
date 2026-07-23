@@ -9,6 +9,7 @@ import {
   groundedGemPaths,
   groundedGemWorkflow,
 } from '../data/groundedGem'
+import { getStep } from '../data/steps'
 
 export function GroundedGemPage() {
   return (
@@ -20,7 +21,9 @@ export function GroundedGemPage() {
         <span className="rounded-full bg-brand-50 px-2 py-0.5 text-xs font-semibold text-brand-700">
           선택 확장 · 필수 아님
         </span>
-        <span className="text-sm text-neutral-500">권장 6분</span>
+        <span className="text-sm text-neutral-500">
+          권장 {getStep(7).durationMinutes}분
+        </span>
       </div>
 
       <div className="mb-6 rounded-xl border border-brand-200 bg-brand-50 p-5">

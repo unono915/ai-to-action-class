@@ -22,7 +22,7 @@ export const steps: Step[] = [
     shortTitle: '시작하기',
     summary: '오늘의 목표와 준비물을 확인합니다.',
     presentationHeadline: '판단하는 AI, 움직이는 수업',
-    durationMinutes: 5,
+    durationMinutes: 3,
   },
   {
     id: 2,
@@ -30,7 +30,7 @@ export const steps: Step[] = [
     shortTitle: '수업 나눔',
     summary: '실제 수업 한 편을 처음부터 끝까지 따라가며 나눕니다.',
     presentationHeadline: '판단을 행동으로 연결하면 수업이 달라집니다.',
-    durationMinutes: 12,
+    durationMinutes: 15,
   },
   {
     id: 3,
@@ -39,7 +39,7 @@ export const steps: Step[] = [
     summary:
       'Teachable Machine에서 손 모양 모델을 만들고 다음 단계에서 사용할 URL을 복사합니다.',
     presentationHeadline: 'O·X·배경 모델과 공유 URL을 만듭니다.',
-    durationMinutes: 15,
+    durationMinutes: 10,
   },
   {
     id: 4,
@@ -48,7 +48,7 @@ export const steps: Step[] = [
     summary:
       '모델 URL을 연결하고 손동작에 따라 문구와 이미지가 바뀌는지 확인합니다.',
     presentationHeadline: '손동작에 따라 문구와 이미지가 바뀌게 합니다.',
-    durationMinutes: 12,
+    durationMinutes: 10,
   },
   {
     id: 5,
@@ -56,7 +56,7 @@ export const steps: Step[] = [
     shortTitle: '교과 확장',
     summary: '내 교과에서 AI 모델을 활용할 아이디어를 구체화합니다.',
     presentationHeadline: '이 판단을 내 수업 어디에 연결할까요?',
-    durationMinutes: 12,
+    durationMinutes: 14,
   },
   {
     id: 6,
@@ -64,7 +64,7 @@ export const steps: Step[] = [
     shortTitle: 'Gem 만들기',
     summary: '수업 정보를 반영한 메타 프롬프트로 Gem 요청사항과 지식 초안을 설계합니다.',
     presentationHeadline: 'Gem을 만들기 전에 설계 프롬프트부터 만듭니다.',
-    durationMinutes: 15,
+    durationMinutes: 12,
   },
   {
     id: 7,
@@ -73,7 +73,7 @@ export const steps: Step[] = [
     summary:
       '선택 확장: 검토한 자료를 Gemini Notebook에 모아 Gem의 지식으로 연결합니다.',
     presentationHeadline: '검토한 노트북을 Gem의 지식으로 연결하기 — 선택 확장',
-    durationMinutes: 6,
+    durationMinutes: 5,
   },
   {
     id: 8,

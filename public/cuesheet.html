@@ -44,14 +44,24 @@
     .toc{display:flex;gap:10px;margin:22px 0 4px;flex-wrap:wrap}
     .toc a{display:inline-block;background:var(--surface-2);border-radius:8px;padding:8px 14px;font-size:13px;font-weight:700;text-decoration:none;color:var(--ink)}
     .seclabel{font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-faint);margin:46px 0 12px;padding-top:8px;border-top:1px solid var(--line)}
+    .notice{margin:12px 0 16px;padding:16px 18px;border:1px solid var(--brand);border-radius:12px;background:var(--brand-soft);color:var(--brand-ink);font-size:14px}
+    .notice strong{display:block;margin-bottom:3px;color:var(--ink)}
+    .prep-grid,.rule-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+    .prep,.rule{background:var(--surface);border:1px solid var(--line);border-radius:11px;padding:15px;box-shadow:var(--shadow)}
+    .prep .clock,.rule .clock{display:block;margin-bottom:6px;font:700 12px var(--mono);color:var(--brand)}
+    .prep strong,.rule strong{display:block;margin-bottom:6px;font-size:14px}
+    .prep ul,.rule ul{margin:0;padding-left:18px;color:var(--ink-soft);font-size:12.5px}
+    .prep li+li,.rule li+li{margin-top:4px}
+    .cutline{border-color:var(--hands);background:var(--hands-soft)}
+    .cutline .clock{color:var(--hands-ink)}
 
     /* 한눈에 보기 표 */
     .rows{display:flex;flex-direction:column;gap:8px}
-    .row{display:grid;grid-template-columns:92px 1fr;gap:14px;background:var(--surface);border:1px solid var(--line);border-radius:11px;box-shadow:var(--shadow);overflow:hidden}
+    .row{display:grid;grid-template-columns:112px 1fr;gap:14px;background:var(--surface);border:1px solid var(--line);border-radius:11px;box-shadow:var(--shadow);overflow:hidden}
     .row>.t{padding:14px 0 14px 15px;border-left:4px solid var(--brand);font-family:var(--mono);font-variant-numeric:tabular-nums}
     .row.ppt>.t{border-left-color:var(--ppt)} .row.hands>.t{border-left-color:var(--hands)}
     .row .time{font-size:14px;font-weight:700;letter-spacing:-.02em}
-    .row .dur{font-size:11.5px;color:var(--ink-faint)}
+    .row .dur{font-size:11.5px;color:var(--ink-faint);white-space:nowrap}
     .row>.c{padding:12px 16px 12px 0;min-width:0}
     .row .ttl{font-size:15px;font-weight:800;margin:0 0 3px}
     .row .tag{font-size:10.5px;font-weight:700;padding:2px 8px;border-radius:999px;margin-left:6px;white-space:nowrap;vertical-align:middle}
@@ -73,7 +83,9 @@
     .badge.stop{background:var(--hands-soft);color:var(--hands-ink)}
     .foot{margin-top:36px;padding-top:18px;border-top:1px solid var(--line);font-size:12.5px;color:var(--ink-faint)}
     .top{position:fixed;right:16px;bottom:16px;background:var(--brand);color:#fff;border-radius:999px;padding:9px 15px;font-size:12.5px;font-weight:700;text-decoration:none;box-shadow:var(--shadow)}
+    @media(max-width:720px){.prep-grid,.rule-grid{grid-template-columns:1fr}}
     @media(max-width:640px){.row{grid-template-columns:1fr}.row>.t{border-left:none;border-top:4px solid var(--brand);display:flex;gap:8px;align-items:baseline;padding:12px 15px}.row.ppt>.t{border-top-color:var(--ppt)}.row.hands>.t{border-top-color:var(--hands)}.row>.c{padding:2px 15px 14px}.line{grid-template-columns:1fr;gap:2px}.line .cue{padding-top:0}}
+    @media print{body{background:#fff}.wrap{max-width:none;padding:10mm}.scene,.row,.prep,.rule{break-inside:avoid;box-shadow:none}.top{display:none}.seclabel{margin-top:24px}}
   </style>
 </head>
 <body>
@@ -81,9 +93,9 @@
   <header>
     <p class="eyebrow">발표 진행 큐시트 &amp; 대본 · 발표자용</p>
     <h1>판단하는 AI, 움직이는 수업</h1>
-    <p class="lede">이미지 분류 모델의 판단을 <b>실제 행동으로 잇는</b> 수업 한 편을, 선생님들과 편하게 나누고 직접 만들어 보는 80분. PPT로 문을 열고 → 링크로 <b>실습 페이지</b>에 들어와 사례 나눔·실습을 진행하고 → 다시 PPT로 돌아와 Q&amp;A로 닫습니다.</p>
+    <p class="lede">이미지 분류 모델의 판단을 <b>실제 행동으로 잇는</b> 수업 한 편을 나누고, 선생님들이 자기 교과의 AI 역할을 설계해 보는 90분. 3·4단계의 기술 실습은 각각 10분으로 제한하고, <b>수업 사례 → 교과 확장 → Gem 설계 → 교사의 역할</b>에 무게를 둡니다.</p>
     <div class="meta">
-      <span>총 <b>80분</b></span>
+      <span>총 <b>90분</b></span>
       <span>교원 <b>40명</b> · 각자 노트북</span>
       <span>발표자 지윤호</span>
     </div>
@@ -93,119 +105,278 @@
       <span class="n ppt">PPT Q&amp;A</span>
     </div>
     <div class="toc">
-      <a href="#cue">① 한눈에 보기 (큐시트)</a>
-      <a href="#script">② 발표 대본</a>
+      <a href="#setup">① 시작 전 세팅</a>
+      <a href="#cue">② 90분 타임라인</a>
+      <a href="#script">③ 실제 진행 대본</a>
+      <a href="#fallback">④ 지연·오류 대응</a>
     </div>
   </header>
 
+  <!-- ===================== 시작 전 세팅 ===================== -->
+  <p class="seclabel" id="setup">① 시작 전 세팅</p>
+  <div class="notice">
+    <strong>리허설 결론</strong>
+    이 발표의 성패는 모델을 완벽히 만드는 데 있지 않다. 3·4단계는 “판단이 행동으로 이어지는 장면”을 한 번 경험하면 끝낸다. 정시 전환을 우선하고, 수업 사례·교과 적용·Gem 설계·최종 메시지의 시간을 보호한다.
+  </div>
+
+  <div class="prep-grid">
+    <article class="prep">
+      <span class="clock">T-20분</span>
+      <strong>발표자 환경 점검</strong>
+      <ul>
+        <li>PPT 1–8, 사이트, 큐시트를 각각 열기</li>
+        <li>Teachable Machine·행동 연결·Gemini 로그인 확인</li>
+        <li>예시 모델 URL과 행동 연결 결과 미리 시험</li>
+        <li>웹캠 권한, 화면 확대 100%, 알림 끄기</li>
+      </ul>
+    </article>
+    <article class="prep">
+      <span class="clock">T-10분</span>
+      <strong>참가자 진입 준비</strong>
+      <ul>
+        <li>PPT 5의 접속 주소·QR을 화면에 고정</li>
+        <li>큐시트는 보조 화면이나 태블릿에 표시</li>
+        <li>사이트 STEP1과 발표 모드 표지 확인</li>
+        <li>완료자가 옆 사람을 돕도록 미리 안내</li>
+      </ul>
+    </article>
+    <article class="prep">
+      <span class="clock">T-3분</span>
+      <strong>마지막 확인</strong>
+      <ul>
+        <li>발표 모드 타이머 초기화</li>
+        <li>외부 도구 탭은 로그인된 상태로 대기</li>
+        <li>예시 모델 버튼 위치 다시 확인</li>
+        <li>00:26·00:36·01:00·01:17 전환 시각 기억</li>
+      </ul>
+    </article>
+  </div>
+
+  <div class="rule-grid">
+    <article class="rule">
+      <span class="clock">보호할 구간</span>
+      <strong>줄이지 않는 핵심</strong>
+      <ul>
+        <li>STEP2 실제 수업 장면</li>
+        <li>STEP5 내 교과 아이디어</li>
+        <li>STEP6 AI 역할 설계</li>
+        <li>STEP8 최종 메시지</li>
+      </ul>
+    </article>
+    <article class="rule cutline">
+      <span class="clock">절대 컷라인</span>
+      <strong>완료보다 정시 전환</strong>
+      <ul>
+        <li>00:35 모델 URL 없으면 예시 모델</li>
+        <li>00:44 행동 한 번 확인 후 정리</li>
+        <li>01:11 AI 응답을 기다리지 않고 이동</li>
+        <li>개별 계정 문제는 무대에서 해결하지 않기</li>
+      </ul>
+    </article>
+    <article class="rule">
+      <span class="clock">진행 톤</span>
+      <strong>설명보다 질문</strong>
+      <ul>
+        <li>“다 되셨나요?”보다 다음 행동을 말하기</li>
+        <li>기다리는 동안 핵심 질문 한 문장만</li>
+        <li>막힌 사람은 예시·짝·관찰로 흐름 유지</li>
+        <li>완료 인원보다 시계를 기준으로 이동</li>
+      </ul>
+    </article>
+  </div>
+
   <!-- ===================== 큐시트 ===================== -->
-  <p class="seclabel" id="cue">① 시간대별 한눈에 보기</p>
+  <p class="seclabel" id="cue">② 90분 타임라인</p>
   <div class="rows">
-    <div class="row ppt"><div class="t"><div class="time">0:00</div><div class="dur">~0:07 · 7분</div></div><div class="c"><p class="ttl">오프닝 · 접속 안내<span class="tag ppt">PPT 1–5</span></p><p class="d">제목 → 철학 한 줄 → (등록 QR) → 소개 → <b>실습 링크로 전원 접속</b>. 철학은 한 줄만, 깊은 얘기는 웹에서.</p></div></div>
-    <div class="row"><div class="t"><div class="time">0:07</div><div class="dur">~0:10 · 3분</div></div><div class="c"><p class="ttl">시작하기<span class="tag web">STEP 1</span></p><p class="d">도구 사용법보다 <b>AI의 판단을 수업 행동으로 연결하는 설계</b>가 오늘의 초점임을 밝히고, 네 가지 여정과 준비물을 확인한 뒤 발표 모드로 전환.</p></div></div>
-    <div class="row"><div class="t"><div class="time">0:10</div><div class="dur">~0:22 · 12분</div></div><div class="c"><p class="ttl">수업 나눔 (18장·현장 사진 6장)<span class="tag web">STEP 2 · 발표의 심장</span></p><p class="d">내 수업 한 편을 시간순으로. 철학은 설명 말고 <b>장면이 말하게</b>. 정지 포인트 4·8·9·11·18장.</p></div></div>
-    <div class="row hands"><div class="t"><div class="time">0:22</div><div class="dur">~0:37 · 15분</div></div><div class="c"><p class="ttl">손동작 분류 모델 만들기<span class="tag hands">STEP 3 · 실습</span></p><p class="d">상단 시작 버튼 → 4개 작업 카드 → <b>모델 URL 복사</b>. 예시 모델은 안전망으로.</p></div></div>
-    <div class="row hands"><div class="t"><div class="time">0:37</div><div class="dur">~0:49 · 12분</div></div><div class="c"><p class="ttl">판단을 행동으로<span class="tag hands">STEP 4 · 실습</span></p><p class="d">상단 도구 버튼 → URL 연결·행동 설정·결과 확인. 손동작이 문구와 이미지로 이어지는 <b>핵심 장면</b>.</p></div></div>
-    <div class="row"><div class="t"><div class="time">0:49</div><div class="dur">~1:00 · 11분</div></div><div class="c"><p class="ttl">내 교과로 확장 · 아이디어 Gem<span class="tag web">STEP 5</span></p><p class="d">교과 카드 + 아이디어 코치 Gem으로 <b>한 문장 아이디어</b> → Padlet.</p></div></div>
-    <div class="row"><div class="t"><div class="time">1:00</div><div class="dur">~1:07 · 7분</div></div><div class="c"><p class="ttl">나만의 개념 체크 Gem<span class="tag web">STEP 6 · 데모</span></p><p class="d">수업 정보 입력 → 메타 프롬프트 다운로드 → Gemini에서 요청사항·지식 초안 생성. <b>시간 조절 밸브</b>.</p></div></div>
-    <div class="row"><div class="t"><div class="time">1:07</div><div class="dur">~1:09 · 2분</div></div><div class="c"><p class="ttl">근거 자료 연결하기<span class="tag web">STEP 7 · 선택·데모</span></p><p class="d">Gemini Notebook에 자료 모으기 → 교사 검토 → Gem 지식에 노트북 연결. <b>필수 아님·무오류 아님</b>.</p></div></div>
-    <div class="row"><div class="t"><div class="time">1:09</div><div class="dur">~1:14 · 5분</div></div><div class="c"><p class="ttl">핵심 정리와 마무리<span class="tag web">STEP 8</span></p><p class="d">하버드·MIT 연구 → AI에 맡긴 역할의 차이 → 교사의 교수 설계 → 최종 메시지.</p></div></div>
-    <div class="row ppt"><div class="t"><div class="time">1:14</div><div class="dur">~1:20 · 6분</div></div><div class="c"><p class="ttl">Q&amp;A · 수령<span class="tag ppt">PPT 6–8</span></p><p class="d">웹 마무리 메시지를 받은 뒤 궁금한 점을 편하게 질문받고 종료.</p></div></div>
+    <div class="row ppt"><div class="t"><div class="time">00:00</div><div class="dur">~00:08 · 8분</div></div><div class="c"><p class="ttl">오프닝 · 접속 안내<span class="tag ppt">PPT 1–5</span></p><p class="d">인사 → 사고 경험 프레임 → 짧은 소개 → 사이트 접속. <b>00:08에는 전원 완료를 기다리지 않고</b> STEP1로 이동.</p></div></div>
+    <div class="row"><div class="t"><div class="time">00:08</div><div class="dur">~00:11 · 3분</div></div><div class="c"><p class="ttl">오늘의 지도<span class="tag web">STEP 1</span></p><p class="d">도구보다 역할 설계가 초점임을 밝히고 네 가지 여정·준비물을 확인. 발표 모드 3장을 정확히 1분씩.</p></div></div>
+    <div class="row"><div class="t"><div class="time">00:11</div><div class="dur">~00:26 · 15분</div></div><div class="c"><p class="ttl">수업 나눔 (18장)<span class="tag web">STEP 2 · 발표의 심장</span></p><p class="d">실제 수업을 시간순으로 따라가며 판단→행동→학생 질문의 변화를 보여 준다. 체크포인트: <b>00:16 슬라이드 8 · 00:20 슬라이드 11 · 00:25 슬라이드 18</b>.</p></div></div>
+    <div class="row hands"><div class="t"><div class="time">00:26</div><div class="dur">~00:36 · 10분</div></div><div class="c"><p class="ttl">최소 모델 만들기<span class="tag hands">STEP 3 · 압축 실습</span></p><p class="d">O·X·배경을 최소 데이터로 학습하고 URL 확보. <b>00:35까지 URL이 없으면 예시 모델로 전환</b>. 모델 완성도 경쟁 금지.</p></div></div>
+    <div class="row hands"><div class="t"><div class="time">00:36</div><div class="dur">~00:46 · 10분</div></div><div class="c"><p class="ttl">판단을 행동으로<span class="tag hands">STEP 4 · 압축 실습</span></p><p class="d">URL 연결 → 예시 문구 적용 → 손동작 한 번 확인. 꾸미기보다 <b>카메라→판단→레이블→행동</b> 구조를 읽는 데 집중.</p></div></div>
+    <div class="row"><div class="t"><div class="time">00:46</div><div class="dur">~01:00 · 14분</div></div><div class="c"><p class="ttl">내 교과로 확장<span class="tag web">STEP 5 · 핵심 실습</span></p><p class="d">교과 카드와 아이디어 코치 Gem으로 한 문장 아이디어를 만들고 Padlet에 공유. 기술을 <b>수업 판단으로 번역</b>하는 구간.</p></div></div>
+    <div class="row"><div class="t"><div class="time">01:00</div><div class="dur">~01:12 · 12분</div></div><div class="c"><p class="ttl">나만의 개념 체크 Gem<span class="tag web">STEP 6 · 설계 실습</span></p><p class="d">예시 불러오기 → 내 교과에 맞게 수정 → 메타 프롬프트 저장 → Gemini에서 산출 구조 확인. AI 응답 완료는 과제로 남겨도 됨.</p></div></div>
+    <div class="row"><div class="t"><div class="time">01:12</div><div class="dur">~01:17 · 5분</div></div><div class="c"><p class="ttl">근거 자료 연결하기<span class="tag web">STEP 7 · 선택 확장</span></p><p class="d">파일 직접 연결과 Notebook 연결의 차이, Deep Research의 역할, 교사 검토와 자료 밖 응답 제한을 화면 캡처로 설명.</p></div></div>
+    <div class="row"><div class="t"><div class="time">01:17</div><div class="dur">~01:24 · 7분</div></div><div class="c"><p class="ttl">핵심 정리와 마무리<span class="tag web">STEP 8 · 결론</span></p><p class="d">두 연구를 직접 비교하지 않는다는 한계 → AI에 맡긴 역할 → 교사의 교수 설계 → 최종 메시지. <b>이 7분은 줄이지 않는다.</b></p></div></div>
+    <div class="row ppt"><div class="t"><div class="time">01:24</div><div class="dur">~01:30 · 6분</div></div><div class="c"><p class="ttl">Q&amp;A · 종료<span class="tag ppt">PPT 6–8</span></p><p class="d">질문 2–3개를 받고 01:29에 마지막 메시지, 안내, 감사 인사로 종료.</p></div></div>
   </div>
 
   <!-- ===================== 대본 ===================== -->
-  <p class="seclabel" id="script">② 발표 대본 (읽는 톤: 편하게, 대화하듯)</p>
+  <p class="seclabel" id="script">③ 실제 진행 대본 (읽는 톤: 편하게, 대화하듯)</p>
+  <nav class="toc" aria-label="대본 단계 바로가기">
+    <a href="#script-opening">오프닝</a>
+    <a href="#script-step1">1 시작</a>
+    <a href="#script-step2">2 수업</a>
+    <a href="#script-step3">3 모델</a>
+    <a href="#script-step4">4 행동</a>
+    <a href="#script-step5">5 교과</a>
+    <a href="#script-step6">6 Gem</a>
+    <a href="#script-step7">7 근거</a>
+    <a href="#script-step8">8 마무리</a>
+    <a href="#script-qa">Q&amp;A</a>
+  </nav>
 
-  <div class="scene">
+  <div class="scene" id="script-opening">
     <h3>PPT 오프닝</h3>
-    <p class="sub">PPT 슬라이드 1–5 · 0:00–0:07</p>
-    <div class="line"><div class="cue">PPT 1</div><p>안녕하세요, 경문고등학교에서 정보 가르치는 지윤호입니다. 만나서 반갑습니다. 오늘 이 시간은요, 거창한 이론 강의라기보다… 제가 교실에서 실제로 해 본 수업 한 편을 같이 열어보는 시간이라고 생각해 주시면 좋겠어요. 편하게 들으시고, 중간중간 직접 만들어도 보시고요.</p></div>
-    <div class="line"><div class="cue">PPT 2</div><p>제가 수업을 만들 때 붙들고 있는 생각은 딱 하나예요. ‘어떤 도구를 쓸까’보다 ‘학생한테 어떤 <b>사고 경험</b>을 줄까.’ AI 도구가 아무리 많아져도 결국 중요한 건 그거더라고요. 오늘 그 이야기를 제 수업 사례로 풀어볼게요.</p></div>
-    <div class="line"><div class="cue">PPT 3–4</div><p>아, 콘페스타 등록 QR은 안내대로 미리 찍어주시고요. 저는 간단히 — 정보 교사고, AI·에듀테크 쪽으로 이런저런 활동을 하고 있습니다. 자세한 건 넘어갈게요(웃음).</p></div>
-    <div class="line"><div class="cue">PPT 5</div><p>자, 여기가 중요해요. 화면의 이 주소로 다 같이 들어와 주세요. QR 찍으셔도 되고요. 크롬에서 열고, 구글 로그인 됐는지, 웹캠 허용되는지 이 세 개만 확인! … 다 들어오셨나요? 좋습니다. 이제 이 화면이 앞으로 80분 동안 여러분의 안내서예요. 저를 따라오시면 됩니다.</p></div>
+    <p class="sub">PPT 슬라이드 1–5 · 00:00–00:08 · 00:05:30부터 접속 시작</p>
+    <div class="line"><div class="cue">00:00 · PPT1</div><p>안녕하세요. 경문고등학교에서 정보를 가르치는 지윤호입니다. 오늘은 새로운 AI 도구를 많이 소개하는 시간이라기보다, 제가 실제로 진행한 수업 한 편을 선생님들과 같이 열어보고 “이걸 내 교과에서는 어떻게 바꿀까”까지 직접 설계해 보는 시간입니다.</p></div>
+    <div class="line"><div class="cue">00:02 · PPT2</div><p>제가 수업을 만들 때 붙드는 질문은 하나예요. <b>“학생에게 어떤 사고 경험을 줄 것인가?”</b> AI가 판단을 잘하는 것만으로 수업이 되지는 않더라고요. 그 판단이 학생의 설명, 선택, 행동과 어떻게 연결되는지가 중요했습니다. 오늘은 그 연결을 따라가 보겠습니다.</p></div>
+    <div class="line"><div class="cue">00:04 · PPT3–4</div><p>등록 안내는 화면대로 확인해 주시고요. 저는 정보 교사로 수업에서 이미지 분류, 생성형 AI, 피지컬 컴퓨팅을 연결하는 활동을 해 왔습니다. 제 소개는 이 정도만 하고 바로 교실 이야기로 들어가겠습니다.</p></div>
+    <div class="line"><div class="cue">00:05:30 · PPT5</div><p>이제 화면의 주소나 QR로 사이트를 열어 주세요. Chrome 권장이고, Google 로그인과 웹캠은 잠시 뒤 필요합니다. <span class="stage">(30초 후)</span> 첫 화면이 보이면 저를 향해 엄지 한번 보여 주세요. 좋습니다. 아직 안 열린 분은 옆 선생님 화면을 함께 보셔도 됩니다. 접속 문제 때문에 전체 흐름을 멈추지는 않을게요. 이 사이트가 앞으로 90분 동안 우리의 지도입니다.</p></div>
+    <div class="line"><div class="cue stop">00:08 전환</div><p><span class="stage">PPT에서 사이트 STEP1 실습 화면으로 전환.</span> 지금부터는 같은 사이트에서 발표 화면과 실습 화면을 오가겠습니다.</p></div>
   </div>
 
-  <div class="scene">
+  <div class="scene" id="script-step1">
     <h3>STEP 1 · 시작하기</h3>
-    <p class="sub">웹 · 발표 모드 · 0:07–0:10</p>
-    <div class="line"><div class="cue">멘트</div><p>이 화면이 오늘의 지도예요. 오늘은 도구 하나를 더 배우는 데서 끝내지 않고, AI의 판단을 학생의 사고와 수업 행동으로 어떻게 연결할지 직접 설계해 보겠습니다. 판단 만들기, 행동 연결하기, 내 교과로 확장하기, 학습 Gem 설계하기까지 네 가지를 손에 들고 가실 거예요. Chrome과 웹캠, Google 로그인, 학생들이 자주 어려워하는 개념 하나만 확인해 주세요. 그럼 먼저 실제 수업 이야기부터 시작하겠습니다. 화면을 발표 모드로 바꿉니다.</p></div>
+    <p class="sub">웹 · 발표 모드 3장 · 00:08–00:11</p>
+    <div class="line"><div class="cue">00:08 · 표지</div><p><span class="stage">‘발표 모드 열기’ 클릭.</span> 오늘은 도구를 익히는 데서 끝나지 않고, AI의 판단을 학생의 사고와 수업 행동으로 연결하는 흐름을 직접 설계합니다. 이 문장이 오늘 90분의 기준입니다.</p></div>
+    <div class="line"><div class="cue">00:09 · 여정</div><p>판단 만들기, 행동 연결하기, 내 교과로 확장하기, 학습 Gem 설계하기. 네 가지를 직접 해 봅니다. 앞의 두 가지는 원리를 몸으로 확인하는 짧은 경험이고, 뒤의 두 가지가 선생님들 수업으로 가져갈 핵심입니다.</p></div>
+    <div class="line"><div class="cue">00:10 · 준비</div><p>Chrome, 웹캠, Google 계정, 그리고 학생들이 자주 어려워하는 교과 개념 하나를 떠올려 주세요. 개념이 바로 생각나지 않아도 사이트의 예시를 사용할 수 있습니다. 먼저 제가 왜 이 흐름을 만들었는지 실제 수업부터 보여드리겠습니다.</p></div>
+    <div class="line"><div class="cue stop">00:11 전환</div><p><span class="stage">다음 버튼으로 STEP2 슬라이드 1 진입.</span> 지금부터 15분 동안은 만들지 않고 제 수업 한 편을 따라와 주세요.</p></div>
   </div>
 
-  <div class="scene">
+  <div class="scene" id="script-step2">
     <h3>STEP 2 · 수업 나눔 <span class="badge">발표의 심장</span></h3>
-    <p class="sub">웹 · 발표 모드 · 18장 · 0:10–0:22 &nbsp;|&nbsp; ★ = 실제 현장 사진, ⏸ = 잠깐 멈추는 곳</p>
-    <div class="line"><div class="cue photo">1 ★사진</div><p>이게 그날 교실이에요. 고1 정보 시간, 연구수업이었습니다. 오늘은 이 수업을 처음부터 끝까지 그대로 열어볼게요.</p></div>
-    <div class="line"><div class="cue photo">2 ★사진</div><p>보시다시피 뒤에 선생님들이 쭉 참관하신 공개수업이었어요. 스물일곱 명하고, 웹캠 달린 컴퓨터실에서 시작했습니다.</p></div>
-    <div class="line"><div class="cue">3 교안</div><p>지난 시간에 학생들이 손 모양 분류 모델을 만들었어요. 사진을 넣으면 ‘하트냐, 너냐, 기타냐’ 판단해주는 데까지. 그런데… 많은 수업이 딱 여기서 끝나요. ‘아, AI가 손을 구분하는구나’ 하고요.</p></div>
-    <div class="line"><div class="cue stop">4 ⏸</div><p>그래서 제가 이 질문을 화면에 크게 걸어놨습니다. <b>“판단만 하고 실행하지 않으면, 달라지는 게 있을까요?”</b> <span class="stage">(선생님들 쪽 보며) 어떻게 생각하세요? … 이 질문, 오늘 저랑 계속 따라다닐 거예요.</span></p></div>
-    <div class="line"><div class="cue">5 교안</div><p>그래서 첫 활동을 개념 설명이 아니라 문제로 열었어요. “여러분, 오늘부터 말을 못 합니다. 손으로만 대화해야 하는데 상대는 수화를 몰라요. 컴퓨터가 내 손동작을 알아듣고 말로 옮겨주면 어떨까?” 이렇게요.</p></div>
-    <div class="line"><div class="cue photo">6 ★사진</div><p>그랬더니 아이들이 이렇게 웹캠 앞에서 엄지척, 브이, 손바닥… 손동작을 지어가며 데이터를 모으더라고요. 코딩 한 줄 없이, 클릭이랑 촬영만으로 각자 자기 모델을 만들었어요.</p></div>
-    <div class="line"><div class="cue">7 교안</div><p>학습이 끝나면 레이블마다 하고 싶은 말을 붙여요. 하트엔 ‘고마워!’, 엄지척엔 ‘잘했어!’, 손바닥엔 ‘잠깐 멈춰!’. 여기서 포인트 — 모델을 <b>학습</b>시키는 일이랑, <b>행동</b>을 정하는 일은 사실 별개 단계예요.</p></div>
-    <div class="line"><div class="cue stop">8 ⏸ 인용</div><p>그리고 이 판단에 ‘몸통’을 답니다. 카메라 → 모델 → 라벨 → 프로그램. 손동작이 인식되면 정해둔 말이 화면에 뜨는 구조를 학생이 직접 완성했어요. 그때 한 학생이 이렇게 말했어요 — <b>(그대로 읽기) “아, 모델은 판단만 하고, 그 결과로 행동하게 만들 수 있는 거네요?”</b> … 저는 이 말이 그날 수업의 성적표라고 생각해요.</p></div>
-    <div class="line"><div class="cue stop">9 ★⏸</div><p>그래서 한 학생 걸 전자칠판에 크게 띄웠어요. 손을 바꾸니까 진짜로 ‘집에 가고 싶다’ 같은 문구가 딱 뜨는 거예요. <span class="stage">교실이 술렁였죠(웃음).</span> 판단이 행동이 되는 순간을, 스물일곱 명이 다 같이 본 거예요.</p></div>
-    <div class="line"><div class="cue">10 인용</div><p>그랬더니 한 학생이 이래요 — <b>“모델을 로봇에 넣으면, 우리 일을 대신해줄 수 있겠네요?”</b> 도구 체험에서 멈추지 않고, ‘AI로 뭘 해결할까’를 스스로 상상하기 시작한 거죠.</p></div>
-    <div class="line"><div class="cue stop">11 ★⏸</div><p>물론 마냥 순조롭진 않았어요(웃음). 예상대로 장난 손동작이 막 나왔죠. 근데 그때 질문을 살짝 바꿨어요. “이 손으로 친구한테 어떤 <b>좋은 말</b>을 전할 수 있을까?” 그랬더니 하트, 괜찮아, 응원해… 이렇게 돌아오더라고요. 그날 수업을 살린 건 완벽한 도구가 아니라 질문 하나였어요.</p></div>
-    <div class="line"><div class="cue">12 교안</div><p>활동을 하고 나서 ‘그럼 이미지 분류는 어떤 문제에 맞을까’ 기준을 같이 세웠어요. 네 개의 관문 — 카메라로 볼 수 있는가, 라벨로 나눌 수 있는가, 데이터를 모을 수 있는가, 판단 뒤 행동할 수 있는가.</p></div>
-    <div class="line"><div class="cue">13 교안</div><p>선도 같이 그었어요. 표정은 카메라로 보이죠. 근데 진심이나 성실함은 안 보이잖아요. 사람을 외모로 판단하는 데는 쓰지 않기로 했습니다. AI가 <b>판단할 수 있다</b>는 거랑 <b>판단해도 된다</b>는 건 다른 문제니까요.</p></div>
-    <div class="line"><div class="cue">14 인용</div><p>재밌는 건, 기준이 생기니까 애들이 달라져요. AI가 아이디어를 추천해주면 그냥 받는 게 아니라 — <b>“이건 카메라로 보이나? 틀렸을 때 위험하지 않나?”</b> 따지기 시작해요. 소비자가 아니라 검토자가 된 거죠.</p></div>
-    <div class="line"><div class="cue">15 교안</div><p>마지막 활동에서는 자기 관심사로 갔어요. 스포츠, 환경, 요리… ‘내 분야에서 이미지 분류로 뭘 해결할까.’ ‘왜 배워요?’ 하던 애들이 스스로 문제를 찾더라고요.</p></div>
-    <div class="line"><div class="cue photo">16 ★사진</div><p>그걸 다 Padlet에 모았어요. 급식 눈치게임 도우미, 스마트 푸시업 자세 교정기, 하늘 상태 알려주는 것까지… 서로 댓글 달고 좋아요 누르면서 시선을 넓혔습니다.</p></div>
-    <div class="line"><div class="cue">17 교안</div><p>수업은 이 말로 닫았어요. 가장 중요한 판단을 내리는 건 AI가 아니라 ‘나’다. AI는 도구고, 어디에 쓸지 정하고 책임지는 건 우리라고요.</p></div>
-    <div class="line"><div class="cue stop">18 ⏸ 다리</div><p>자, 여기까지가 제 수업이었어요. 거창한 프로젝트 아니죠? 이 흐름을 이제 선생님들 교과로 같이 옮겨볼 거예요. 방금 그 네 개의 관문, 실습 내내 또 만나실 거고요. 화면을 실습 모드로 바꿉니다.</p></div>
+    <p class="sub">웹 · 발표 모드 · 18장 · 00:11–00:26 &nbsp;|&nbsp; 체크포인트 00:16 슬라이드 8 · 00:20 슬라이드 11 · 00:25 슬라이드 18</p>
+    <div class="line"><div class="cue photo">11:00 · 1 ★</div><p>이게 그날 교실입니다. 고1 정보 시간, 연구수업이었어요. 완성된 결과만 보여드리지 않고 시작부터 끝까지 그대로 열어보겠습니다.</p></div>
+    <div class="line"><div class="cue photo">11:40 · 2 ★</div><p>스물일곱 명, 웹캠이 달린 컴퓨터실, 뒤에는 참관 선생님들이 계셨습니다. 특별한 AI 실험실이 아니라 선생님들 학교에도 있을 법한 환경입니다.</p></div>
+    <div class="line"><div class="cue">12:20 · 3</div><p>지난 시간에 학생들은 손 모양을 하트·너·기타로 구분하는 모델을 만들었습니다. 그런데 많은 AI 수업이 “잘 구분하네”에서 끝납니다. 저는 그 다음이 궁금했어요.</p></div>
+    <div class="line"><div class="cue stop">13:00 · 4 ⏸</div><p><b>“판단만 하고 실행하지 않으면, 달라지는 게 있을까요?”</b> <span class="stage">(청중을 보고 3초 멈춤)</span> 이 질문이 오늘 발표 전체를 끌고 갑니다.</p></div>
+    <div class="line"><div class="cue">14:00 · 5</div><p>그래서 개념 설명이 아니라 문제 상황으로 열었습니다. “말을 못 하고 손으로만 대화해야 하는데 상대가 수화를 모른다면, 컴퓨터가 손동작을 말로 옮겨주게 할 수 있을까?”</p></div>
+    <div class="line"><div class="cue photo">14:45 · 6 ★</div><p>아이들은 웹캠 앞에서 엄지척, 브이, 손바닥을 바꿔가며 데이터를 모았습니다. 클릭과 촬영만으로 각자 자기 모델을 만들었어요.</p></div>
+    <div class="line"><div class="cue">15:30 · 7</div><p>그리고 레이블마다 말과 이미지를 붙였습니다. 모델을 <b>학습시키는 일</b>과 모델의 판단 뒤에 <b>행동을 정하는 일</b>은 별개의 설계라는 점이 드러납니다.</p></div>
+    <div class="line"><div class="cue stop">16:15 · 8 ⏸</div><p>카메라 → 모델 → 레이블 → 프로그램. 한 학생이 이렇게 말했습니다. <b>“아, 모델은 판단만 하고, 그 결과로 행동하게 만들 수 있는 거네요?”</b> 저는 이 말이 그날 수업의 성적표라고 생각합니다.</p></div>
+    <div class="line"><div class="cue stop">17:30 · 9 ★</div><p>한 학생의 결과를 전자칠판에 띄웠습니다. 손을 바꾸니 문구가 실제로 바뀌었고 교실이 술렁였어요. 판단이 행동이 되는 장면을 모두가 함께 본 순간입니다.</p></div>
+    <div class="line"><div class="cue">18:30 · 10</div><p>곧바로 “모델을 로봇에 넣으면 우리 일을 대신할 수도 있겠네요?”라는 말이 나왔습니다. 도구 체험에서 문제 해결 상상으로 질문이 이동한 거죠.</p></div>
+    <div class="line"><div class="cue stop">19:15 · 11 ⏸</div><p>물론 장난 손동작도 나왔습니다. 그때 “하지 마”가 아니라 <b>“이 손으로 친구에게 어떤 좋은 말을 전할 수 있을까?”</b>라고 바꿔 물었습니다. 그날 수업을 살린 것은 완벽한 도구가 아니라 질문 하나였습니다.</p></div>
+    <div class="line"><div class="cue">20:30 · 12</div><p>활동 뒤에는 이미지 분류가 어떤 문제에 맞는지 네 가지 관문을 세웠습니다. 카메라로 볼 수 있는가, 레이블로 나눌 수 있는가, 데이터를 모을 수 있는가, 판단 뒤 행동할 수 있는가.</p></div>
+    <div class="line"><div class="cue">21:15 · 13</div><p>경계도 정했습니다. 표정은 카메라로 볼 수 있지만 진심이나 성실함은 보이지 않습니다. AI가 <b>판단할 수 있다</b>는 것과 <b>판단해도 된다</b>는 것은 다릅니다.</p></div>
+    <div class="line"><div class="cue">22:10 · 14</div><p>기준이 생기니 학생들은 AI 추천을 그대로 받지 않았습니다. “이건 카메라로 보이나?”, “틀렸을 때 위험하지 않나?”를 따지기 시작했어요. 소비자에서 검토자로 바뀐 겁니다.</p></div>
+    <div class="line"><div class="cue">23:00 · 15</div><p>마지막에는 스포츠, 환경, 요리처럼 자기 관심사에서 문제를 찾았습니다. ‘왜 배워요?’에서 ‘어디에 쓸까요?’로 질문이 이동했습니다.</p></div>
+    <div class="line"><div class="cue photo">23:45 · 16 ★</div><p>아이디어는 Padlet에 모았습니다. 급식 눈치게임 도우미, 푸시업 자세 교정기, 하늘 상태 안내처럼 서로 다른 시선이 한 화면에 모였습니다.</p></div>
+    <div class="line"><div class="cue">24:30 · 17</div><p>수업은 이렇게 닫았습니다. 가장 중요한 판단을 내리는 것은 AI가 아니라 나다. 어디에 쓰고 어떻게 책임질지는 사람이 정한다.</p></div>
+    <div class="line"><div class="cue stop">25:10 · 18 ⏸</div><p>여기까지가 제 수업입니다. 이제 앞의 두 기술을 짧게 직접 경험하고, 더 중요한 질문인 “내 교과에서 무엇을 판단하게 하고 어떤 행동으로 이을까?”로 넘어가겠습니다.</p></div>
+    <div class="line"><div class="cue stop">00:26 전환</div><p><span class="stage">실습 모드로 전환 → 왼쪽 STEP3 클릭.</span> 다음 20분은 완성품을 만드는 시간이 아니라 판단→행동 구조를 손으로 확인하는 시간입니다.</p></div>
   </div>
 
-  <div class="scene">
-    <h3>STEP 3 · 손동작 분류 모델 만들기 <span class="badge">실습</span></h3>
-    <p class="sub">웹 · 실습 모드 → 참가자 각자 · 0:22–0:37</p>
-    <div class="line"><div class="cue">안내</div><p>자, 백문이 불여일견. 방금 그 손동작 모델을 직접 만들어봅시다. 화면 맨 위 ‘Teachable Machine 열기’부터 누르세요. 오늘 목표는 모델만 만드는 게 아니라, 다음 단계에 붙여 넣을 <b>모델 URL까지 복사하는 것</b>입니다. 화면의 네 카드만 따라가시면 돼요 — 프로젝트 열기, O·X·배경 데이터 모으기, 학습하고 시험하기, 내보내고 URL 복사하기.</p></div>
-    <div class="line"><div class="cue">순회</div><p>데이터를 모을 때 위치·거리·각도를 조금씩 바꿔주세요. 훈련이 끝나면 배경도 바꿔보면서 “이 모델이 정말 손 모양을 보는가?” 한 번 의심해보시고요. 직접 만든 모델이 잘 안 되는 분만 상단의 ‘예시 모델’을 안전망으로 쓰시면 4단계를 그대로 이어갈 수 있습니다.</p></div>
+  <div class="scene" id="script-step3">
+    <h3>STEP 3 · 최소 손동작 모델 만들기 <span class="badge">10분 압축 실습</span></h3>
+    <p class="sub">웹 · 실습 모드 → Teachable Machine · 00:26–00:36 · 컷라인 00:35</p>
+    <div class="line"><div class="cue">26–27 · 목표</div><p>이번 목표는 좋은 분류기를 완성하는 것이 아닙니다. O·X·배경을 대략 구분하고 <b>다음 단계에 넣을 모델 URL 하나를 확보</b>하면 성공입니다. 화면 상단의 ‘Teachable Machine 열기’를 누르세요.</p></div>
+    <div class="line"><div class="cue">27–30 · 데이터</div><p>이미지 프로젝트를 열고 레이블을 O, X, 배경으로 바꿉니다. 각 레이블은 20장 안팎만 빠르게 모으세요. O와 X는 위치와 거리를 조금 바꾸고, 배경은 손이 없는 화면을 담습니다. 오늘은 데이터 양을 늘리느라 시간을 쓰지 않습니다.</p></div>
+    <div class="line"><div class="cue">30–32 · 학습</div><p>‘모델 학습’을 누르고 기다리는 동안 질문 하나만 드릴게요. <b>지금 모델은 손 모양을 보고 있을까요, 뒤의 배경을 외우고 있을까요?</b> 학습이 끝나면 손의 거리나 각도 하나만 바꿔 시험합니다. 재학습은 하지 않습니다.</p></div>
+    <div class="line"><div class="cue">32–35 · URL</div><p>바로 ‘모델 내보내기’로 가서 업로드하고 공유 URL을 복사하세요. URL이 나온 분은 옆 선생님을 한 분만 도와주세요. <span class="stage">발표자는 순회하며 내보내기 화면과 업로드 대기만 집중 지원.</span></p></div>
+    <div class="line"><div class="cue stop">00:35 컷</div><p>지금 URL이 없는 분은 실패한 게 아닙니다. 사이트의 <b>예시 모델</b>을 눌러 다음 단계로 가세요. 오늘 핵심은 학습 속도가 아니라 판단을 행동에 연결하는 구조입니다. 복사한 URL 또는 예시 모델을 준비하고 STEP4로 이동하겠습니다.</p></div>
   </div>
 
-  <div class="scene">
-    <h3>STEP 4 · 판단을 행동으로 <span class="badge">실습</span></h3>
-    <p class="sub">웹 · 행동 연결 사이트(새 탭) · 0:37–0:49</p>
-    <div class="line"><div class="cue">시연</div><p>이제 화면 맨 위 ‘행동 연결 사이트 열기’를 누르세요. 방금 복사한 모델 URL을 붙여 넣고 레이블이 뜨는지 확인합니다. 그다음 O·X·배경마다 보여줄 문구와 이미지를 정하면 됩니다. 화면에는 이 흐름을 세 카드로만 정리해두었습니다.</p></div>
-    <div class="line"><div class="cue stop">핵심</div><p>자, 웹캠 앞에서 손을 바꿔보세요. 모델의 판단에 따라 문구와 이미지가 같이 바뀌죠? 방금 카메라 입력 → 모델의 판단 → 레이블 → 행동이 하나로 연결됐습니다. 이게 아까 제 수업에서 아이들이 술렁였던 그 장면이에요. 이제 각자 확인해보세요.</p></div>
+  <div class="scene" id="script-step4">
+    <h3>STEP 4 · 판단을 행동으로 <span class="badge">10분 압축 실습</span></h3>
+    <p class="sub">웹 · 행동 연결 사이트(새 탭) · 00:36–00:46 · 꾸미기보다 흐름 확인</p>
+    <div class="line"><div class="cue">36–38 · 시연</div><p><span class="stage">발표자 화면으로 먼저 시연.</span> ‘행동 연결 사이트 열기’를 누르고 모델 URL을 붙여 넣습니다. 레이블이 나타나면 연결 성공입니다. URL이 없는 분은 예시 모델을 사용하세요. 여기까지 모두 같은 출발점으로 맞추겠습니다.</p></div>
+    <div class="line"><div class="cue">38–41 · 연결</div><p>각자 URL을 넣고 O·X·배경 레이블이 보이는지 확인해 주세요. 안 보이면 URL 앞뒤 공백과 카메라 허용만 확인합니다. 1분 안에 해결되지 않으면 예시 모델로 바꿉니다.</p></div>
+    <div class="line"><div class="cue">41–44 · 행동</div><p>문구는 화면 예시를 그대로 쓰겠습니다. O는 “이해했어요”, X는 “다시 설명해 주세요”, 배경은 “손동작을 보여 주세요”. 이미지를 고르는 데 시간을 쓰지 말고 우선 문구가 바뀌게 만드세요.</p></div>
+    <div class="line"><div class="cue stop">44–45:30 · 확인</div><p>웹캠 앞에서 O와 X를 한 번씩 보여 주세요. 문구가 바뀌었다면 손을 들어 표시해 주세요. 지금 카메라 입력 → 모델의 판단 → 레이블 → 행동이 연결됐습니다. 완벽하게 안 된 분은 옆 화면에서 그 흐름만 확인하셔도 충분합니다.</p></div>
+    <div class="line"><div class="cue stop">45:30–46</div><p>기술 설명은 여기서 멈추겠습니다. 중요한 것은 이 사이트가 아니라 <b>판단 뒤에 어떤 학생 행동을 설계할 것인가</b>입니다. 이제 내 교과로 옮겨보겠습니다. 외부 탭은 닫거나 두고 원래 사이트 STEP5로 돌아와 주세요.</p></div>
   </div>
 
-  <div class="scene">
-    <h3>STEP 5 · 내 교과로 확장 · 아이디어 코치 Gem</h3>
-    <p class="sub">웹 · 발표+실습 · 0:49–1:00</p>
-    <div class="line"><div class="cue">멘트</div><p>여기까지가 ‘기술’이었다면, 지금부터가 진짜예요. 이걸 내 교과 어디에 붙일까. 화면에 교과 카드 있어요 — 체육은 자세, 국어는 발음, 과학은 잎 상태… 필터 눌러보면서 내 과목이랑 가까운 거 찾아보세요.</p></div>
-    <div class="line"><div class="cue">안내</div><p>그리고 ‘아이디어 코치 Gem’ 새 탭에서 열어서 교과랑 개념만 넣어보세요. 아까 그 네 관문에 맞춰 같이 다듬어줍니다. 나온 아이디어는 Padlet에 한 줄 올려주세요. 마흔 분의 아이디어가 오늘 제일 큰 선물이에요.</p></div>
+  <div class="scene" id="script-step5">
+    <h3>STEP 5 · 내 교과로 확장 <span class="badge">핵심 실습</span></h3>
+    <p class="sub">웹 · 교과 카드 → 아이디어 코치 Gem → Padlet · 00:46–01:00</p>
+    <div class="line"><div class="cue">46–48 · 전환</div><p>여기까지는 기술의 문법을 확인했습니다. 지금부터가 선생님들 수업에 남는 부분입니다. <b>무엇을 판단하게 할 것인가, 그 판단 뒤에 학생이 무엇을 하게 할 것인가.</b> 화면의 교과 사례를 빠르게 훑어보세요.</p></div>
+    <div class="line"><div class="cue">48–50 · 기준</div><p>아이디어를 볼 때 네 가지를 확인합니다. 카메라로 볼 수 있는가, 라벨로 나눌 수 있는가, 데이터를 모을 수 있는가, 판단 뒤 의미 있는 행동이 있는가. 그리고 틀렸을 때 학생에게 위험하거나 낙인이 되지 않는지도 봅니다.</p></div>
+    <div class="line"><div class="cue">50–56 · Gem</div><p>‘아이디어 코치 Gem’을 열고 교과, 개념, 관찰 가능한 대상을 적어보세요. 답을 받으면 그대로 채택하지 말고 “카메라로 실제 관찰 가능한가?”, “판단 뒤 학생이 무엇을 설명하거나 수정하는가?”를 한 번 더 물어보세요. <span class="stage">발표자는 두 교과 정도를 순회하며 질문을 말로 모델링.</span></p></div>
+    <div class="line"><div class="cue">56–59 · 공유</div><p>이제 아이디어를 한 문장으로 줄입니다. <b>“나는 [교과·개념] 수업에서 [관찰 대상]을 분류하고, 그 결과에 따라 학생이 [행동]하도록 하겠다.”</b> 이 문장만 Padlet에 올려 주세요. 이름이나 학생 정보는 넣지 않습니다.</p></div>
+    <div class="line"><div class="cue stop">59–60 · 연결</div><p><span class="stage">Padlet에서 서로 다른 아이디어 2개만 읽기.</span> 같은 이미지 분류라도 교과와 행동이 달라지면 완전히 다른 수업이 됩니다. 이제 생성형 AI도 똑같이, 무엇을 답하게 할지가 아니라 <b>어떤 역할로 행동하게 할지</b> 설계해 보겠습니다.</p></div>
   </div>
 
-  <div class="scene">
-    <h3>STEP 6 · 나만의 개념 체크 Gem <span class="badge">데모</span></h3>
-    <p class="sub">웹 · 프롬프트 빌더 · 1:00–1:07 · 시간 조절 밸브</p>
-    <div class="line"><div class="cue">멘트</div><p>AI 활용이 이미지 분류만 있는 건 아니죠. 이번엔 살짝 틀어서, 학생 개념 이해를 ‘되묻는’ AI를 만들어볼게요. 포인트는 하나 — 정답을 바로 안 알려주는 것.</p></div>
-    <div class="line"><div class="cue">시연</div><p>화면에 교과·개념·오개념을 넣으면 맞춤 메타 프롬프트를 내려받을 수 있어요. 이 파일을 Gemini에 넣으면 Gem 요청사항과 지식 자료 초안을 만들어줍니다. 둘 다 교과서와 수업 자료로 확인한 뒤 Gem에 넣어주세요. 시간이 빠듯하면 이 단계는 나중에 천천히 하셔도 됩니다.</p></div>
+  <div class="scene" id="script-step6">
+    <h3>STEP 6 · 나만의 개념 체크 Gem <span class="badge">설계 실습</span></h3>
+    <p class="sub">웹 · 메타 프롬프트 빌더 → Gemini · 01:00–01:12 · AI 응답 대기 금지</p>
+    <div class="line"><div class="cue">60–62 · 문제</div><p>Gem 요청사항에 “친절하게 개념을 가르쳐 줘” 정도만 넣으면 정답을 길게 설명하는 챗봇이 되기 쉽습니다. 오늘 필요한 것은 먼저 학생에게 설명하게 하고, 빠진 내용을 묻고, 오개념을 다시 생각하게 하는 AI입니다. 그래서 짧은 지침이 아니라 <b>Gem을 설계하는 메타 프롬프트</b>를 만듭니다.</p></div>
+    <div class="line"><div class="cue">62–65 · 시연</div><p><span class="stage">예시 칩 하나를 눌러 화면을 채운다.</span> 교과·학년·개념만이 아니라 핵심 요소, 오개념, 첫 질문, 마지막 산출물, 말투까지 정합니다. 이 항목들이 곧 AI에게 허용할 도움의 범위입니다.</p></div>
+    <div class="line"><div class="cue">65–68 · 수정</div><p>선생님들은 가까운 예시를 하나 불러온 뒤, 교과·개념·오개념·첫 질문만 자기 수업에 맞게 우선 바꿔보세요. 나머지 필수 항목도 짧게 한 문장씩 채웁니다. 처음부터 완벽하게 쓰지 않아도 됩니다. 오늘 목표는 구조를 가진 파일 하나를 저장하는 것입니다.</p></div>
+    <div class="line"><div class="cue">68–70 · 저장</div><p>오른쪽에 필수 정보 완료가 뜨면 ‘메타 프롬프트 다운로드’를 누르세요. 복사 버튼 옆 ‘Gemini 열기’로 이동해 붙여 넣을 수 있습니다. 파일이 저장된 분은 이 단계의 핵심 산출물을 확보한 겁니다.</p></div>
+    <div class="line"><div class="cue">70–71 · 검토</div><p>AI가 만들 결과는 세 가지입니다. Gem 요청사항, 지식 자료 초안, 교사 검토 메모. 중요한 것은 둘 다 <b>초안</b>이라는 점입니다. 교과서와 수업 자료에 대조하지 않은 지식은 바로 Gem에 넣지 않습니다. 완료 코드도 보안이나 평가 수단이 아닙니다.</p></div>
+    <div class="line"><div class="cue stop">01:11 컷</div><p>Gemini 답변이 아직 생성 중이어도 기다리지 않겠습니다. 다운로드한 파일은 남아 있으니 이후에 이어갈 수 있습니다. 지금은 “AI가 학생에게 무엇을 하게 할지 교사가 먼저 설계한다”는 원리를 가져가시면 됩니다.</p></div>
+    <div class="line"><div class="cue stop">01:12 전환</div><p>여기에 한 단계 더 붙일 수 있습니다. AI가 아무 지식이나 말하지 않도록 근거 범위를 정하는 방법입니다. 이건 선택 확장입니다.</p></div>
   </div>
 
-  <div class="scene">
+  <div class="scene" id="script-step7">
     <h3>STEP 7 · 근거 자료 연결하기 <span class="badge">선택 · 데모</span></h3>
-    <p class="sub">웹 · 1:07–1:09</p>
-    <div class="line"><div class="cue">멘트</div><p>여기부터는 필수가 아니라 선택 확장입니다. 6단계에서 끝내셔도 충분해요. 근거가 중요한 Gem이라면 수업 자료와 공식 출처를 Gemini Notebook, 예전 NotebookLM에 먼저 모아두세요. 자료가 더 필요하면 Deep Research로 보고서와 출처 후보를 찾을 수도 있습니다. 다만 자동으로 모였다고 바로 믿는 게 아니라, 교사가 원문을 확인하고 수업 범위에 맞는 것만 남기는 게 핵심이에요. 이렇게 검토한 노트북 자체를 Gem의 ‘지식’에 연결하면 답변의 근거 범위를 좁혀 할루시네이션 가능성을 줄일 수 있습니다. 무오류가 되는 건 아니니, 자료 밖 질문에는 확인할 수 없다고 답하는 지침과 출처 확인까지 함께 넣어주세요.</p></div>
+    <p class="sub">웹 · 화면 캡처 중심 · 01:12–01:17 · 계정별 기능 차이는 현장에서 해결하지 않음</p>
+    <div class="line"><div class="cue">72–73 · 선택</div><p>이 단계는 필수가 아닙니다. 자료가 한두 개면 검토한 교과서 발췌본이나 학습지를 Gem 지식에 바로 넣는 편이 간단합니다. 여러 자료를 계속 보완하거나 출처 관리가 중요할 때 Gemini Notebook을 선택합니다.</p></div>
+    <div class="line"><div class="cue">73–75 · 흐름</div><p>Notebook에 수업 자료와 공식 출처를 모으고, 필요하면 Deep Research로 보고서와 출처 후보를 찾습니다. 하지만 자동으로 모인 결과가 곧 지식은 아닙니다. 교사가 원문을 확인하고 수업 범위에 맞는 자료만 남긴 뒤 노트북을 Gem의 지식으로 연결합니다.</p></div>
+    <div class="line"><div class="cue">75–76 · 지침</div><p>그리고 요청사항에 두 문장을 꼭 넣습니다. “연결된 자료를 우선 근거로 답하라.” “자료에서 확인할 수 없으면 추측하지 말고 확인할 수 없다고 말하라.” 자료 안 질문과 자료 밖 질문을 각각 시험해야 합니다.</p></div>
+    <div class="line"><div class="cue stop">76–77 · 한계</div><p>이렇게 하면 근거 범위를 좁혀 할루시네이션 가능성을 줄일 수 있지만 무오류가 되지는 않습니다. Notebook·Deep Research·Gem 연결 버튼이 계정마다 다르게 보이면 오늘은 화면 캡처만 보시면 됩니다. 기능 유무보다 <b>근거 범위를 교사가 정한다</b>는 원칙이 핵심입니다.</p></div>
   </div>
 
-  <div class="scene">
+  <div class="scene" id="script-step8">
     <h3>STEP 8 · 공유와 마무리</h3>
-    <p class="sub">웹 · 1:09–1:14</p>
-    <div class="line"><div class="cue">연구</div><p>마지막으로 같은 생성형 AI가 왜 전혀 다른 학습 장면을 만들 수 있는지 보겠습니다. 하버드 연구의 AI는 교과 내용에 맞춘 튜터였고, MIT 프리프린트의 AI는 에세이 작성을 돕는 범용 도구였습니다. 두 연구는 과제와 설계가 달라 직접 비교할 수는 없습니다.</p></div>
-    <div class="line"><div class="cue">연결</div><p>그래도 우리에게 중요한 질문을 줍니다. AI에게 무엇을 맡겼는가? 학생 대신 생각하고 쓰게 했는가, 아니면 학생이 설명하고 다시 생각하도록 도왔는가?</p></div>
-    <div class="line"><div class="cue">실습</div><p>오늘 만든 Gem도 챗봇 하나를 만든 실습이 아닙니다. 먼저 설명하게 하고, 빠진 내용을 질문하고, 오개념을 다시 생각하게 하고, 자기 말로 수정하게 하는 AI의 역할을 설계한 경험입니다.</p></div>
-    <div class="line"><div class="cue stop">마무리</div><p>학생의 생각을 대신하는 AI가 아니라, 학생이 더 깊이 생각하도록 돕는 AI를 설계해야 합니다. AI 시대의 교사는 도구 사용법을 알려주는 사람을 넘어, 학생의 배움을 위해 AI의 역할을 설계하는 사람입니다.</p></div>
+    <p class="sub">웹 · 발표 모드 5장 · 01:17–01:24 · 결론 7분 보호</p>
+    <div class="line"><div class="cue">77–78 · 질문</div><p><span class="stage">발표 모드로 전환.</span> 같은 생성형 AI를 사용하면 결과도 같을까요? 어떤 연구에서는 학습 성과와 참여가 높아졌고, 다른 연구에서는 인지적 참여와 글의 소유감 저하 가능성이 관찰됐습니다. 왜 달랐을까요?</p></div>
+    <div class="line"><div class="cue">78–80 · 두 역할</div><p>하버드 연구의 AI는 교과 내용에 맞춘 튜터로, 질문과 단계적 피드백을 제공했습니다. MIT Media Lab 프리프린트의 AI는 에세이 작성을 지원하는 범용 도구였습니다. 한쪽은 학습 과정을 돕고, 다른 한쪽은 결과물 작성 일부를 대신할 가능성이 있었습니다.</p></div>
+    <div class="line"><div class="cue">80–81 · 한계</div><p>두 연구는 대상, 과제, 설계가 달라 직접 우열을 비교할 수 없습니다. MIT 연구는 프리프린트이기도 합니다. 그래서 “AI는 좋다, 나쁘다”가 아니라 <b>언제 어떤 역할과 도움을 맡겼는가</b>를 보자는 것입니다.</p></div>
+    <div class="line"><div class="cue">81–83 · 교사</div><p>결과를 가르는 것은 생성형 AI 자체보다 교사의 교수 설계입니다. 사용하는 시점, 도움의 범위, 정답 대신 설명을 이끌 질문, 교과 자료와 평가 기준, 학생이 AI 답변을 검토하는 활동을 교사가 정합니다.</p></div>
+    <div class="line"><div class="cue">83–84 · 실습</div><p>오늘 만든 Gem도 챗봇 하나가 아닙니다. 먼저 설명하게 하고, 빠진 내용을 질문하고, 오개념을 다시 생각하게 하고, 학생이 자기 말로 수정하게 하는 <b>AI의 역할</b>을 설계한 것입니다.</p></div>
+    <div class="line"><div class="cue stop">01:24 마무리</div><p><b>학생의 생각을 대신하는 AI가 아니라, 학생이 더 깊이 생각하도록 돕는 AI를 설계해야 합니다.</b> AI 시대의 교사는 도구 사용법을 알려주는 사람을 넘어, 학생의 배움을 위해 AI의 역할을 설계하는 사람입니다. <span class="stage">(문장을 읽은 뒤 3초 멈추고 PPT로 전환)</span></p></div>
+  </div>
+
+  <div class="scene" id="script-qa">
+    <h3>PPT Q&amp;A</h3>
+    <p class="sub">PPT 슬라이드 6–8 · 01:24–01:30 · 질문 2–3개</p>
+    <div class="line"><div class="cue">84–89 · 질문</div><p>여기까지 90분의 핵심 이야기는 마쳤습니다. 실제 학교에서 적용할 때 걱정되는 점, 오늘 도구가 잘 안 됐던 부분, Gem 설계와 관련한 질문을 편하게 말씀해 주세요. <span class="stage">질문이 바로 없으면: “내 교과에 옮길 때 가장 먼저 걸리는 지점은 무엇인가요?”라고 먼저 묻기.</span></p></div>
+    <div class="line"><div class="cue stop">01:29 정리</div><p>마지막 질문까지 받고 정리하겠습니다. 오늘 완성하지 못한 모델이나 Gem은 사이트에 다시 들어오면 이어갈 수 있습니다. 중요한 것은 도구 하나를 기억하는 것이 아니라, 학생이 더 깊이 생각하도록 AI의 역할을 설계하는 관점을 가져가는 것입니다.</p></div>
+    <div class="line"><div class="cue stop">01:30 끝</div><p>각자의 교실에서 작은 질문 하나, 작은 행동 하나부터 시작해 보시길 바랍니다. 함께해 주셔서 감사합니다.</p></div>
+  </div>
+
+  <!-- ===================== 지연·오류 대응 ===================== -->
+  <p class="seclabel" id="fallback">④ 지연·오류 대응</p>
+  <div class="rule-grid">
+    <article class="rule">
+      <span class="clock">3분 지연</span>
+      <strong>공유 시간을 압축</strong>
+      <ul>
+        <li>STEP5 Padlet 사례 2개 → 1개</li>
+        <li>STEP6 Gemini 실행은 생략하고 파일 저장까지만</li>
+        <li>STEP7은 4분으로 설명</li>
+        <li>STEP8 7분은 그대로 유지</li>
+      </ul>
+    </article>
+    <article class="rule cutline">
+      <span class="clock">5분 이상 지연</span>
+      <strong>기술 구간부터 자르기</strong>
+      <ul>
+        <li>STEP3 00:32에 예시 모델로 일괄 전환</li>
+        <li>STEP4 참가자 설정 대신 발표자 시연+한 번 테스트</li>
+        <li>STEP7 두 경로와 한계만 2분 설명</li>
+        <li>Q&amp;A 최소 4분 확보</li>
+      </ul>
+    </article>
+    <article class="rule">
+      <span class="clock">시간이 3분 남음</span>
+      <strong>더 설명하지 않기</strong>
+      <ul>
+        <li>STEP5 Padlet 아이디어 1개 추가 소개</li>
+        <li>또는 Q&amp;A로 시간을 넘기기</li>
+        <li>STEP3·4 기능 설명을 늘리지 않기</li>
+        <li>새 도구나 새 사례를 즉석에서 추가하지 않기</li>
+      </ul>
+    </article>
   </div>
 
   <div class="scene">
-    <h3>PPT Q&amp;A</h3>
-    <p class="sub">PPT 슬라이드 6–8 · 1:14–1:20</p>
-    <div class="line"><div class="cue">Q&amp;A</div><p>다시 왔습니다. 오늘 보신 수업과 직접 만들어 본 모델·Gem에 대해 궁금한 점을 편하게 물어봐 주세요.</p></div>
-    <div class="line"><div class="cue stop">끝</div><p>각자의 교실에서 학생의 생각을 더 깊게 만드는 AI의 역할을 하나씩 설계해 보시길 바랍니다. 감사합니다!</p></div>
+    <h3>상황별 한 문장 대응</h3>
+    <p class="sub">문제를 해결하는 동안 전체 흐름을 멈추지 않기 위한 멘트</p>
+    <div class="line"><div class="cue">사이트 접속</div><p>“아직 화면이 안 열린 분은 옆 선생님 화면을 함께 봐 주세요. 전체 설명을 먼저 듣고 쉬는 시간이나 종료 후에 접속을 도와드리겠습니다.”</p></div>
+    <div class="line"><div class="cue">웹캠 권한</div><p>“웹캠이 안 되는 분은 예시 모델을 사용하거나 옆 선생님 결과를 관찰해 주세요. 오늘 목표는 촬영 성공이 아니라 판단→행동 구조를 이해하는 것입니다.”</p></div>
+    <div class="line"><div class="cue">학습·업로드</div><p>“00:35까지 URL이 나오지 않으면 예시 모델로 전환하겠습니다. 실패가 아니라 오늘의 핵심 구간으로 이동하기 위한 공통 출발점입니다.”</p></div>
+    <div class="line"><div class="cue">행동 연결</div><p>“URL과 카메라 권한을 한 번 확인하고, 바로 해결되지 않으면 예시 모델로 바꿔 주세요. 꾸미기보다 문구가 한 번 바뀌는 장면만 보면 충분합니다.”</p></div>
+    <div class="line"><div class="cue">Google 계정</div><p>“로그인이나 관리자 설정 때문에 버튼이 다르게 보일 수 있습니다. 발표자 화면으로 흐름을 확인하고 메타 프롬프트 파일만 저장해 두시면 나중에 이어갈 수 있습니다.”</p></div>
+    <div class="line"><div class="cue">Notebook 기능</div><p>“이 기능은 계정마다 제공 범위가 다릅니다. 버튼 위치보다 검토한 자료만 연결하고 자료 밖 질문에는 한계를 밝히게 한다는 원칙을 보겠습니다.”</p></div>
+    <div class="line"><div class="cue">질문 없음</div><p>“도구 사용법보다 수업에 옮길 때 걸리는 지점이 더 궁금합니다. 학생이 AI에게 생각을 맡길까 걱정되는 장면이 있으실까요?”</p></div>
   </div>
 
   <p class="foot">
-    발표자용 비공개 참고 자료입니다(검색 비노출). 시간·대사는 <b>기준값</b>이며 현장 반응에 따라 유연하게. 원칙 하나: <b>학생의 생각을 대신하지 않고, 더 깊게 생각하도록 돕는 AI를 설계한다.</b>
+    발표자용 비공개 참고 자료입니다(검색 비노출). 전체 90분 기준이며, 현장에서는 완료 인원보다 <b>절대 시각</b>을 기준으로 이동한다. 원칙 하나: <b>학생의 생각을 대신하지 않고, 더 깊게 생각하도록 돕는 AI를 설계한다.</b>
   </p>
   <a href="#top" class="top">↑ 맨 위로</a>
 </div>
