@@ -6,6 +6,8 @@ type Props = {
   slideCount: number
   step: number
   totalSteps: number
+  /** 이 단계 권장 소요 시간(분) — 발표 페이싱 참고용 */
+  recommendedMinutes: number
   atStart: boolean
   atEnd: boolean
   onPrev: () => void
@@ -13,7 +15,7 @@ type Props = {
 }
 
 /**
- * 발표 모드 하단 컨트롤 바. 슬라이드 이전·다음, 현재 위치,
+ * 발표 모드 하단 컨트롤 바. 슬라이드 이전·다음, 현재 위치, 권장 시간,
  * 타이머, 전체 화면을 제공한다. 좌우 방향키로도 이동할 수 있다.
  */
 export function PresentationControls({
@@ -21,6 +23,7 @@ export function PresentationControls({
   slideCount,
   step,
   totalSteps,
+  recommendedMinutes,
   atStart,
   atEnd,
   onPrev,
@@ -40,6 +43,9 @@ export function PresentationControls({
       <div className="flex flex-wrap items-center justify-center gap-3">
         <span className="whitespace-nowrap text-sm font-medium text-neutral-500">
           {step}/{totalSteps}단계 · 슬라이드 {slide}/{slideCount}
+        </span>
+        <span className="whitespace-nowrap rounded-full bg-brand-50 px-2.5 py-1 text-xs font-semibold text-brand-700">
+          권장 {recommendedMinutes}분
         </span>
         <Timer />
         <FullscreenButton />

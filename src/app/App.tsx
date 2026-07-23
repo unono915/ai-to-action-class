@@ -5,6 +5,7 @@ import { usePersistedState } from '../hooks/usePersistedState'
 import { useKeyboardNavigation } from '../hooks/useKeyboardNavigation'
 import {
   clampStep,
+  getStep,
   MAX_STEP,
   MIN_STEP,
   type StepId,
@@ -202,6 +203,7 @@ export default function App() {
             slideCount={slideCount}
             step={step}
             totalSteps={MAX_STEP}
+            recommendedMinutes={getStep(step).durationMinutes}
             atStart={atFirstSlide}
             atEnd={atLastSlide}
             onPrev={goPrevSlide}
