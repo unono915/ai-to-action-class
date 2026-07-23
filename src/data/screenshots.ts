@@ -82,19 +82,21 @@ export const screenshots: Record<ScreenshotId, Screenshot> = {
     id: 'gem-builder-study',
     file: 'gem-builder-study.png',
     alt: 'Gem 만들기 화면의 「기본 도구」 드롭다운에서 기본 도구 없음, 가이드 학습, 이미지 만들기, 음악 만들기, Canvas 중 「가이드 학습」을 선택하는 화면',
-    caption: '지식을 추가하기 전에 「기본 도구」에서 「가이드 학습」을 선택합니다.',
+    caption:
+      '개념 확인형 Gem이라면 「기본 도구」에서 「가이드 학습」을 선택할 수 있습니다.',
   },
   'notebook-knowledge': {
     id: 'notebook-knowledge',
     file: 'notebook-knowledge.png',
     alt: 'Gem의 지식 영역에서 「노트북 추가」 창을 열어 연결할 Notebook 목록을 선택하는 화면',
-    caption: 'Gem의 「지식」 영역에서 Notebook을 추가할 수 있습니다.',
+    caption:
+      'Gem의 「지식」에서 더보기 업로드를 열고, 검토를 마친 노트북을 선택합니다.',
   },
   'notebook-knowledge-added': {
     id: 'notebook-knowledge-added',
     file: 'notebook-knowledge-added.png',
     alt: 'Gem의 지식 영역에 Notebook 하나가 자료로 연결되어 표시된 화면',
-    caption: 'Notebook이 Gem의 지식 자료로 연결된 완료 상태입니다.',
+    caption: '노트북 자체가 Gem의 지식 자료로 연결된 완료 상태입니다.',
   },
 }
 

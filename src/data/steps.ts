@@ -66,10 +66,11 @@ export const steps: Step[] = [
   },
   {
     id: 7,
-    title: '자료 기반 Gem',
-    shortTitle: '자료 기반',
-    summary: '선택 심화: 수업 자료에 근거해 답하는 Gem을 안내합니다.',
-    presentationHeadline: '자료에 근거하는 Gem — 선택 심화',
+    title: '근거 자료 연결하기',
+    shortTitle: '지식 연결',
+    summary:
+      '선택 확장: 검토한 자료를 Gemini Notebook에 모아 Gem의 지식으로 연결합니다.',
+    presentationHeadline: '검토한 노트북을 Gem의 지식으로 연결하기 — 선택 확장',
     durationMinutes: 6,
   },
   {

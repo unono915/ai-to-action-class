@@ -196,14 +196,3 @@ export const promptExamples: PromptExample[] = [
     },
   },
 ]
-
-// 자료 기반 Gem 지침 (docs/04 「9. 자료 기반 Gem 지침」)
-export const groundedGemInstructions = `답변은 연결된 자료를 우선 근거로 작성한다.
-
-자료에서 근거를 확인할 수 없는 내용은 추측하지 말고
-"제공된 자료에서는 확인할 수 없습니다."라고 답한다.
-
-가능한 경우 답변의 근거가 된 자료나 항목을 함께 제시한다.`
-
-export const groundedGemCaution =
-  '자료를 연결하면 자료에 근거한 답변을 유도하고 오류 가능성을 줄이는 데 도움이 되지만, AI의 오류가 완전히 사라지는 것은 아닙니다.'

@@ -55,6 +55,14 @@ export const externalLinks = {
     status: 'active',
     description: '다운로드하거나 복사한 메타 프롬프트를 입력하는 생성형 AI',
   },
+  geminiNotebook: {
+    key: 'geminiNotebook',
+    label: 'Gemini Notebook에서 자료 모으기',
+    url: 'https://notebooklm.google.com/',
+    status: 'active',
+    description:
+      '수업 자료와 검토한 웹 출처를 모아 Gem의 지식으로 연결할 노트북을 만드는 도구',
+  },
   harvardAiTutorStudy: {
     key: 'harvardAiTutorStudy',
     label: '하버드 AI 튜터 연구 보기',
