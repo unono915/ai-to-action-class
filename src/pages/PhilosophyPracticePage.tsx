@@ -22,7 +22,7 @@ export function PhilosophyPracticePage() {
         <span className="text-sm text-neutral-500">수업 사례로 보는 철학</span>
       </div>
       <p className="mb-6 max-w-3xl text-neutral-600">
-        제가 진행한 수업 「{lessonOverview.title}」을 따라가며,
+        제가 진행한 수업 「{lessonOverview.title}」를 따라가며,
         <b className="font-semibold text-neutral-800"> ‘판단을 행동으로 잇는다’</b>는
         수업 철학이 수업의 어느 장면에 어떻게 담겨 있었는지 함께 살펴봅니다.
         각 이미지를 누르면 크게 볼 수 있습니다.
